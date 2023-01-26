@@ -5,9 +5,10 @@ interface ISeoProps {
 }
 
 export default function Seo({ title }: ISeoProps) {
+  const titleMessage = `${title} | Next display`;
   return (
     <Head>
-      <title>{title} | Next display</title>
+      <title>{titleMessage}</title>
     </Head>
   );
 }
