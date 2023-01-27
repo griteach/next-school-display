@@ -36,7 +36,7 @@ export async function getServerSideProps() {
     )
   ).json();
   console.log(result);
-  console.log("실행완료");
+  console.log("getServerSideProps에서 실행완료");
 
   return {
     props: { result },

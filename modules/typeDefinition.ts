@@ -15,8 +15,10 @@ export interface IDust {
 }
 export interface IGetDustResult {
   response: {
-    body: {
-      items: [];
+    response: {
+      body: {
+        items: IDust[];
+      };
     };
   };
 }
