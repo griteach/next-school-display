@@ -9,11 +9,11 @@ export default function Home({
   result,
 }: InferGetServerSidePropsType<GetServerSideProps>) {
   return (
-    <>
+    <div className="w-screen h-screen">
       {/* Seo component */}
       <Seo title="Seowon"></Seo>
       <MainInfo response={result} />
-    </>
+    </div>
   );
 }
 
