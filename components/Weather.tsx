@@ -2,7 +2,8 @@ import { IGetDustResult } from "@/modules/typeDefinition";
 import TitleComponent from "./TitleComponent";
 import React from "react";
 import Lottie from "react-lottie";
-import { Player } from "@lottiefiles/react-lottie-player";
+
+//로띠에 json 파일
 import LottieData from "../pages/lottie/73864-smile-meter.json";
 
 export default function WeatherComponent({ response }: IGetDustResult) {
@@ -43,3 +44,5 @@ export default function WeatherComponent({ response }: IGetDustResult) {
     </div>
   );
 }
+
+//fake...
