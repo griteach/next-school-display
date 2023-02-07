@@ -23,9 +23,6 @@ export default function WeatherComponent({ response }: IGetDustResult) {
   };
   return (
     <div className="flex flex-col">
-      <div className="bg-white rounded-tl-lg">
-        <TitleComponent title="미세먼지" />
-      </div>
       <div className="flex flex-col justify-center items-center">
         <h1>Hello TTOWA!!</h1>
         <h2>1.Lottie Add(로티 추가하기)</h2>

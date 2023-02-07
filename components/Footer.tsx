@@ -11,12 +11,11 @@ export default function Footer() {
   });
   return (
     <>
-      <div className="bg-teal-700 col-start-1 col-end-4">
+      <div className="bg-teal-700 col-start-1 col-end-3 rounded-br-lg rounded-bl-lg">
         {loading
           ? "Loading..."
           : `${data?.dust.stationName}${data?.dust.khaiGrade}${data?.dust.pm25Value}${data?.dust.pm10Grade}`}
       </div>
-      <div>{todayData.day}</div>
     </>
   );
 }
