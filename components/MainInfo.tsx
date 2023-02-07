@@ -1,6 +1,6 @@
 import { IGetDustResult } from "@/modules/typeDefinition";
 import WeatherComponent from "./Weather";
-
+import Footer from "./Footer";
 export default function MainInfo({ response }: IGetDustResult) {
   return (
     <>
@@ -15,7 +15,7 @@ export default function MainInfo({ response }: IGetDustResult) {
         <div className="bg-slate-500">01</div>
         <div className="bg-orange-200">03</div>
 
-        <div className="bg-teal-700 col-start-1 col-end-4">footer</div>
+        <Footer></Footer>
       </div>
     </>
   );

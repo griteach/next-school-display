@@ -1,19 +1,17 @@
 import MainInfo from "@/components/MainInfo";
-import { weatherData } from "@/modules/localState";
-import { useReactiveVar } from "@apollo/client";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-
 import Seo from "./seo";
-
 export default function Home({
   result,
 }: InferGetServerSidePropsType<GetServerSideProps>) {
   return (
-    <div className="w-screen h-screen">
-      {/* Seo component */}
-      <Seo title="Seowon"></Seo>
-      <MainInfo response={result} />
-    </div>
+    <>
+      <div className="w-screen h-screen">
+        {/* Seo component */}
+        <Seo title="서원초등학교"></Seo>
+        <MainInfo response={result} />
+      </div>
+    </>
   );
 }
 
