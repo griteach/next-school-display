@@ -9,7 +9,7 @@ interface ILayoutProps {
 export default function Layout({ children }: ILayoutProps) {
   return (
     <>
-      <div className="flex justify-center items-center w-screen h-screen bg-gradient-to-r from-yellow-snap to-yellow-chat">
+      <div className="flex justify-center items-center w-screen h-screen ">
         {children}
       </div>
     </>
