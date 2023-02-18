@@ -9,6 +9,10 @@ module.exports = {
       colors: {
         "yellow-snap": "#fffc00",
         "yellow-chat": "#ffffff",
+        "mojito-l": "#9CECFB",
+        "mojito-r": "#0052D4",
+        "weather-l": "#E062E6",
+        "weather-r": "#7B63ED",
       },
     },
   },

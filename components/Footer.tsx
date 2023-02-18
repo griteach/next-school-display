@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { GET_DUST, IDustGql } from "@/modules/apollo";
 import { useQuery } from "@apollo/client";
-import { todayData } from "../modules/dayjs";
 
 export default function Footer() {
   const { data, loading } = useQuery<IDustGql>(GET_DUST, {

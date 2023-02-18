@@ -9,7 +9,6 @@ export default function Home({
       <div className="w-screen h-screen flex">
         {/* Seo component */}
         <Seo title="서원초등학교"></Seo>
-
         <MainInfo response={result} />
       </div>
     </>

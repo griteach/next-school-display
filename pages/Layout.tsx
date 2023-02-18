@@ -1,7 +1,3 @@
-import { AppProps } from "next/app";
-import Head from "next/head";
-import Seo from "./seo";
-
 interface ILayoutProps {
   children: any;
 }
