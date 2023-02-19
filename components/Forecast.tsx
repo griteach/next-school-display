@@ -1,5 +1,6 @@
 import Lottie from "react-lottie";
 import LottieWeatherPartlyShower from "../pages/lottie/weather/weather-partly-shower.json";
+import LottieDustSmile from "../pages/lottie/dust/happy.json";
 
 export default function Forecast() {
   const weatherOptions = {
@@ -11,13 +12,21 @@ export default function Forecast() {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+  const dustSmileOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: LottieDustSmile,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
     <>
       <div className="w-full h-full bg-gradient-to-r from-weather-l to-weather-r rounded-3xl flex shadow-xl">
         <div className="w-1/2 h-full flex flex-col justify-center items-center p-4">
           <div className="">
             <Lottie
-              options={weatherOptions}
+              options={dustSmileOptions}
               height={100}
               width={100}
               isClickToPauseDisabled={true}
