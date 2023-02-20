@@ -1,24 +1,29 @@
+import { GET_DUST, IDustGql } from "@/modules/apollo";
+import {
+  dustCryingOptions,
+  dustSmileOptions,
+  dustConfusedOptions,
+  dustAwesomeOptions,
+} from "@/modules/lottieOptions";
+import { useQuery } from "@apollo/client";
 import Lottie from "react-lottie";
-import LottieWeatherPartlyShower from "../pages/lottie/weather/weather-partly-shower.json";
-import LottieDustSmile from "../pages/lottie/dust/happy.json";
 
 export default function Forecast() {
-  const weatherOptions = {
-    //예제1
-    loop: true,
-    autoplay: true,
-    animationData: LottieWeatherPartlyShower,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+  const { data, loading } = useQuery<IDustGql>(GET_DUST, {
+    variables: {
+      stationName: "지정면",
     },
-  };
-  const dustSmileOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: LottieDustSmile,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
+  });
+
+  const checkDust = () => {
+    const result = parseInt(data?.dust.pm10Value!);
+    if (result <= 30) {
+      return dustAwesomeOptions;
+    } else if (result <= 80) {
+      return dustSmileOptions;
+    } else if (result > 80) {
+      return dustCryingOptions;
+    }
   };
   return (
     <>
@@ -26,14 +31,16 @@ export default function Forecast() {
         <div className="w-1/2 h-full flex flex-col justify-center items-center p-4">
           <div className="">
             <Lottie
-              options={dustSmileOptions}
+              options={checkDust()!}
               height={100}
               width={100}
               isClickToPauseDisabled={true}
             />
           </div>
           <div>
-            <div className="text-xl text-white ">비가와요</div>
+            <div className="text-xl text-white ">
+              {loading ? "Loading..." : `${data?.dust.pm10Value}`}
+            </div>
           </div>
         </div>
         <div className="w-1/2 h-full flex flex-col justify-center items-center ">
@@ -41,7 +48,9 @@ export default function Forecast() {
             <span className="text-6xl">21</span>
             <span className="text-6xl">°</span>
             <div>
-              <span className="text-[10px] text-white">체감온도 26°</span>
+              <span className="text-[10px] text-white">
+                {`${data?.dust.pm10Value}`}
+              </span>
             </div>
           </div>
         </div>
