@@ -16,9 +16,9 @@ export default function AirQuality() {
           <div>
             <CloudFog size={32} color="#938FF2" />
           </div>
-          <div>오늘 하늘은?</div>
+          <div className="ml-2">오늘의 날씨</div>
         </div>
-        <div className="w-full h-full  flex flex-col justify-center items-center p-3 ">
+        <div className="w-full h-full  flex flex-col justify-center items-center p-4 ">
           <div className="w-full h-1/2  flex justify-evenly items-center">
             <div className="w-1/3 h-full  flex justify-center items-center">
               <div>
