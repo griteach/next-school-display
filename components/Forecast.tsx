@@ -1,4 +1,4 @@
-import { GET_DUST, IDustGql } from "@/modules/apollo";
+import { GET_DUST, GET_WEATHER, IDustGql, IWeatherGql } from "@/modules/apollo";
 import {
   dustCryingOptions,
   dustSmileOptions,
@@ -9,55 +9,49 @@ import {
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import Lottie from "react-lottie";
-import { setTimeout } from "timers";
 
 export default function Forecast() {
-  let currentGrade = "";
-  const { data, loading } = useQuery<IDustGql>(GET_DUST, {
-    variables: {
-      stationName: "지정면",
-    },
-  });
+  const [currentGrade, setCurrentGrade] = useState("");
+  const { data: dustData, loading: dustDataLoading } = useQuery<IDustGql>(
+    GET_DUST,
+    {
+      variables: {
+        stationName: "횡성읍",
+      },
+    }
+  );
+  const { data: weatherData, loading: weatherDataLoading } =
+    useQuery<IWeatherGql>(GET_WEATHER);
 
-  const [totalMsg, setTotalMsg] = useState("야외활동 안돼요!");
-  useEffect(() => {
-    setTimeout(() => {
-      checkMsg();
-      setTotalMsg(currentGrade);
-    }, 2000);
-  }, [currentGrade]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkMsg = () => {
-    const pm10Result = parseInt(data?.dust.pm10Grade!);
-    const pm25Result = parseInt(data?.dust.pm25Grade!);
+    const pm10Result = parseInt(dustData?.dust.pm10Grade!);
+    const pm25Result = parseInt(dustData?.dust.pm25Grade!);
     if (pm10Result > 2 || pm25Result > 2) {
-      currentGrade = "야외활동 금지!";
-      return;
+      setCurrentGrade("야외활동 금지!");
     } else if (pm10Result > 1 || pm25Result > 1) {
-      currentGrade = "나가도 좋아요!";
-      return;
+      setCurrentGrade("나가도 좋아요!");
     } else if (pm10Result == 1 && pm25Result == 1) {
-      currentGrade = "깨끗한 하늘!";
-      return;
+      setCurrentGrade("깨끗한 하늘!");
     } else {
-      currentGrade = "확인필요";
-      return;
+      setCurrentGrade("확인필요");
     }
   };
 
+  useEffect(() => {
+    checkMsg();
+  }, [checkMsg, currentGrade]);
+
   const checkDust = () => {
-    const pm10Result = parseInt(data?.dust.pm10Grade!);
-    const pm25Result = parseInt(data?.dust.pm25Grade!);
+    const pm10Result = parseInt(dustData?.dust.pm10Grade!);
+    const pm25Result = parseInt(dustData?.dust.pm25Grade!);
     if (pm10Result > 2 || pm25Result > 2) {
-      currentGrade = "야외활동 금지!";
       return dustCryingOptions;
     } else if (pm10Result > 1 || pm25Result > 1) {
-      currentGrade = "나가도 좋아요!";
       return dustSmileOptions;
     } else if (pm10Result == 1 && pm25Result == 1) {
-      currentGrade = "깨끗한 하늘!";
       return dustAwesomeOptions;
     } else {
-      currentGrade = "확인필요";
       return dustConfusedOptions;
     }
   };
@@ -82,7 +76,7 @@ export default function Forecast() {
       <div className="w-full h-full bg-gradient-to-r from-weather-l to-weather-r rounded-3xl grid grid-cols-2 grid-rows-[2fr_1fr] shadow-xl">
         <div className="flex flex-col justify-center items-center p-4">
           <div className="">
-            {loading ? (
+            {dustDataLoading ? (
               <Lottie
                 options={etcLoadingOptions}
                 height={30}
@@ -100,9 +94,8 @@ export default function Forecast() {
           </div>
           <div>
             <div className="text-xl text-white ">
-              {loading
-                ? "Loading..."
-                : `${totalMsg}, ${data?.dust.pm10Grade}, ${data?.dust.pm25Grade}`}
+              {/* 여기에 메세지 입력 */}
+              {currentGrade}
             </div>
           </div>
         </div>
@@ -110,10 +103,8 @@ export default function Forecast() {
           <div className="text-white">
             <span className="text-6xl">21</span>
             <span className="text-6xl">°</span>
-            <div>
-              <span className="text-[10px] text-white">
-                {`${data?.dust.pm10Value}`}
-              </span>
+            <div className="flex justify-center items-center ">
+              <span className="text-lg text-white"></span>
             </div>
           </div>
         </div>
@@ -121,7 +112,7 @@ export default function Forecast() {
           <div className="w-full grid grid-cols-3 gird-rows-1 justify-items-start items-center">
             <div className="">미세먼지</div>
             <div className="text-2xl justify-self-end">
-              {loading ? (
+              {dustDataLoading ? (
                 <Lottie
                   options={etcLoadingOptions}
                   height={30}
@@ -129,11 +120,11 @@ export default function Forecast() {
                   isClickToPauseDisabled={true}
                 />
               ) : (
-                checkGrade(data?.dust.pm10Grade!)
+                checkGrade(dustData?.dust.pm10Grade!)
               )}
             </div>
             <div className="justify-self-end">
-              {loading ? (
+              {dustDataLoading ? (
                 <Lottie
                   options={etcLoadingOptions}
                   height={30}
@@ -141,7 +132,7 @@ export default function Forecast() {
                   isClickToPauseDisabled={true}
                 />
               ) : (
-                data?.dust.pm10Value
+                dustData?.dust.pm10Value
               )}
               ㎍/m³
             </div>
@@ -149,7 +140,7 @@ export default function Forecast() {
           <div className="w-full grid grid-cols-3 gird-rows-1 justify-items-start items-center">
             <div className="">초미세먼지</div>
             <div className="justify-self-end text-2xl">
-              {loading ? (
+              {dustDataLoading ? (
                 <Lottie
                   options={etcLoadingOptions}
                   height={30}
@@ -157,11 +148,11 @@ export default function Forecast() {
                   isClickToPauseDisabled={true}
                 />
               ) : (
-                checkGrade(data?.dust.pm25Grade!)
+                checkGrade(dustData?.dust.pm25Grade!)
               )}
             </div>
             <div className="justify-self-end">
-              {loading ? (
+              {dustDataLoading ? (
                 <Lottie
                   options={etcLoadingOptions}
                   height={30}
@@ -169,7 +160,7 @@ export default function Forecast() {
                   isClickToPauseDisabled={true}
                 />
               ) : (
-                data?.dust.pm25Value
+                dustData?.dust.pm25Value
               )}
               ㎍/m³
             </div>
