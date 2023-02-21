@@ -23,7 +23,12 @@ export default function Forecast() {
   const { data: weatherData, loading: weatherDataLoading } =
     useQuery<IWeatherGql>(GET_WEATHER);
   //가지고는 왔는데 무슨 타입인지 체크가 필요함..
-
+  console.log(weatherData?.allWeather[0].category);
+  const t1h = weatherData?.allWeather.find(function (item) {
+    if (item.category === "T1H") {
+      return item.obsrValue;
+    }
+  });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkMsg = () => {
     const pm10Result = parseInt(dustData?.dust.pm10Grade!);
@@ -101,7 +106,7 @@ export default function Forecast() {
         </div>
         <div className="flex flex-col justify-center items-center ">
           <div className="text-white">
-            <span className="text-6xl">21</span>
+            <span className="text-6xl"></span>
             <span className="text-6xl">°</span>
             <div className="flex justify-center items-center ">
               <span className="text-lg text-white">{/* 온도 입력 */}</span>

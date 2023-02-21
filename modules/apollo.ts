@@ -15,7 +15,7 @@ interface Weather {
   obsrValue: string;
 }
 export interface IWeatherGql {
-  item: Weather[];
+  allWeather: Weather[];
 }
 export interface IDustGql {
   dust: {
