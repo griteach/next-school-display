@@ -5,16 +5,17 @@ import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 //따로 엔드포인트(서버)를 하나 가지고 있는게 아니기 때문에!
 //나중에 DB랑 연동할거면 프리즈마? 라는 걸로 연결하면 될듯
 
+interface Weather {
+  id: string;
+  baseData: string;
+  baseTime: string;
+  category: string;
+  nx: number;
+  ny: number;
+  obsrValue: string;
+}
 export interface IWeatherGql {
-  weather: {
-    id: string;
-    baseData: string;
-    baseTime: string;
-    category: string;
-    nx: number;
-    ny: number;
-    obsrValue: string;
-  };
+  item: Weather[];
 }
 export interface IDustGql {
   dust: {

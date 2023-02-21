@@ -22,6 +22,7 @@ export default function Forecast() {
   );
   const { data: weatherData, loading: weatherDataLoading } =
     useQuery<IWeatherGql>(GET_WEATHER);
+  //가지고는 왔는데 무슨 타입인지 체크가 필요함..
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkMsg = () => {
@@ -70,7 +71,6 @@ export default function Forecast() {
     }
   };
 
-  const checkMessage = () => {};
   return (
     <>
       <div className="w-full h-full bg-gradient-to-r from-weather-l to-weather-r rounded-3xl grid grid-cols-2 grid-rows-[2fr_1fr] shadow-xl">
@@ -104,7 +104,7 @@ export default function Forecast() {
             <span className="text-6xl">21</span>
             <span className="text-6xl">°</span>
             <div className="flex justify-center items-center ">
-              <span className="text-lg text-white"></span>
+              <span className="text-lg text-white">{/* 온도 입력 */}</span>
             </div>
           </div>
         </div>
