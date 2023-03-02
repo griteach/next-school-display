@@ -1,6 +1,7 @@
 import TitleComponent, { ITitleComponentProps } from "./TitleComponent";
 import Forecast from "./Forecast";
 import AirQuality from "./AirQuality";
+import ApexCharts from "apexcharts";
 
 export default function SideBar({ title }: ITitleComponentProps) {
   return (
@@ -14,7 +15,9 @@ export default function SideBar({ title }: ITitleComponentProps) {
       <div className=" flex flex-col px-4 py-6">
         <AirQuality />
       </div>
-      <div className=" flex flex-col rounded-bl-2xl rounded-br-2xl"></div>
+      <div className=" flex flex-col rounded-bl-2xl rounded-br-2xl p-4">
+        <div className="w-full h-full bg-red-400 rounded-2xl"></div>
+      </div>
     </div>
   );
 }

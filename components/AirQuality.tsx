@@ -8,6 +8,7 @@ import {
   Umbrella,
   Sunglasses,
   Thermometer,
+  DropHalf,
 } from "phosphor-react";
 
 export default function AirQuality() {
@@ -84,7 +85,7 @@ export default function AirQuality() {
             </div>
             <div className="w-1/3 h-full  flex justify-center items-center text-xs">
               <div>
-                <Sunglasses size={28} color="#938FF2" />
+                <DropHalf size={28} color="#938FF2" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
                 <div>습도</div>
