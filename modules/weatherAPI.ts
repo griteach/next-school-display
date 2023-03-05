@@ -6,6 +6,7 @@ export const DUST_PATH_BASIC =
 export const FORCAST_WEATHER_CURRENT_PATH_BASIC =
   "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
 
+//단기예보 (최저/최고기온)
 export const FOCAST_WEATHER_GUESS_PATH_BASIC =
   "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
 

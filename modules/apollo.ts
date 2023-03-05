@@ -14,9 +14,26 @@ interface Weather {
   ny: number;
   obsrValue: string;
 }
+
+interface WeatherGuess {
+  baseDate: string;
+  baseTime: string;
+  category: string;
+  fcstDate: string;
+  fcstTime: string;
+  fcstValue: string;
+  nx: number;
+  ny: number;
+}
+
 export interface IWeatherGql {
   allWeather: Weather[];
 }
+
+export interface IWeatherGuessGql {
+  allWeatherGuess: WeatherGuess[];
+}
+
 export interface IDustGql {
   dust: {
     id: string;
@@ -64,6 +81,21 @@ export const GET_WEATHER = gql`
       baseTime
       id
       obsrValue
+    }
+  }
+`;
+
+export const GET_WEATHER_GUESS = gql`
+  query {
+    allWeatherGuess {
+      baseDate
+      baseTime
+      category
+      fcstDate
+      fcstTime
+      fcstValue
+      nx
+      ny
     }
   }
 `;

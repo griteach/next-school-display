@@ -2,10 +2,13 @@ import dayjs from "dayjs";
 
 const today = dayjs().format("YYYYMMDD");
 const todayFormatDash = dayjs().format("YYYY-MM-DD");
-const currentHour = dayjs().get("hour") - 1;
+const tempHour = dayjs().get("hour");
+const currentHour = tempHour < 10 ? `0` + tempHour : tempHour;
 
-export const todayData = {
+const todayData = {
   day: today,
   day_dash: todayFormatDash,
-  hour: currentHour,
+  hour: currentHour + "00",
 };
+
+export default todayData;

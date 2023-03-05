@@ -1,4 +1,11 @@
-import { GET_DUST, GET_WEATHER, IDustGql, IWeatherGql } from "@/modules/apollo";
+import {
+  GET_DUST,
+  GET_WEATHER,
+  IDustGql,
+  IWeatherGql,
+  IWeatherGuessGql,
+  GET_WEATHER_GUESS,
+} from "@/modules/apollo";
 import {
   dustCryingOptions,
   dustSmileOptions,
@@ -7,6 +14,7 @@ import {
   etcLoadingOptions,
 } from "@/modules/lottieOptions";
 import { useQuery } from "@apollo/client";
+import { Thermometer, ThermometerSimple } from "phosphor-react";
 import { useEffect, useState } from "react";
 import Lottie from "react-lottie";
 
@@ -106,12 +114,13 @@ export default function Forecast() {
           </div>
         </div>
         <div className="flex flex-col justify-center items-center ">
-          <div className="text-white">
+          <div className="text-white flex">
+            <div className="flex justify-center items-center">
+              <ThermometerSimple size={24} />
+            </div>
+
             <span className="text-6xl">{t1h?.obsrValue}</span>
             <span className="text-6xl">°</span>
-            <div className="flex justify-center items-center ">
-              <span className="text-lg text-white">{/* 온도 입력 */}</span>
-            </div>
           </div>
         </div>
         <div className="flex flex-col justify-center items-start col-span-2 px-10 text-white">
@@ -145,7 +154,7 @@ export default function Forecast() {
           </div>
           <div className="w-full grid grid-cols-3 gird-rows-1 justify-items-start items-center">
             <div className="">초미세먼지</div>
-            <div className="justify-self-end text-2xl">
+            <div className="justify-self-end text-2xl  ">
               {dustDataLoading ? (
                 <Lottie
                   options={etcLoadingOptions}
