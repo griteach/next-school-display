@@ -9,7 +9,6 @@ import {
   Wind,
   CloudFog,
   Umbrella,
-  Thermometer,
   DropHalf,
   ThermometerCold,
   ThermometerHot,

@@ -7,6 +7,9 @@ import LottieDustAwesome from "../pages/lottie/dust/awesome.json";
 //로딩 로띠에 파일 임포트
 import LottieEtcLoading from "../pages/lottie/etc/loading.json";
 
+//시계 로띠에 파일 임포트
+import LottieClock from "../pages/lottie/etc/clock.json";
+
 //미세먼지 아이콘 로띠에 옵션
 export const dustCryingOptions = {
   loop: true,
@@ -49,6 +52,16 @@ export const etcLoadingOptions = {
   autoplay: true,
   animationData: LottieEtcLoading,
   rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+//시계 로띠에 옵션
+export const clockOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: LottieClock,
+  renderSettings: {
     preserveAspectRatio: "xMidYMid slice",
   },
 };

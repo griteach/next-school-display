@@ -1,7 +1,7 @@
 import TitleComponent, { ITitleComponentProps } from "./TitleComponent";
 import Forecast from "./Forecast";
 import AirQuality from "./AirQuality";
-import ApexCharts from "apexcharts";
+
 import Clock from "./Clock";
 
 export default function SideBar({ title }: ITitleComponentProps) {

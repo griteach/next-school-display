@@ -1,11 +1,4 @@
-import {
-  GET_DUST,
-  GET_WEATHER,
-  IDustGql,
-  IWeatherGql,
-  IWeatherGuessGql,
-  GET_WEATHER_GUESS,
-} from "@/modules/apollo";
+import { GET_DUST, GET_WEATHER, IDustGql, IWeatherGql } from "@/modules/apollo";
 import {
   dustCryingOptions,
   dustSmileOptions,
@@ -14,7 +7,7 @@ import {
   etcLoadingOptions,
 } from "@/modules/lottieOptions";
 import { useQuery } from "@apollo/client";
-import { Thermometer, ThermometerSimple } from "phosphor-react";
+import { ThermometerSimple } from "phosphor-react";
 import { useEffect, useState } from "react";
 import Lottie from "react-lottie";
 
