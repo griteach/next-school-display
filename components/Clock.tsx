@@ -3,22 +3,16 @@ import Lottie from "react-lottie";
 import { clockOptions } from "@/modules/lottieOptions";
 
 export default function Clock() {
-  const [clock, setClock] = useState("00시00분00초");
+  const [cHour, setCHour] = useState(0);
+  const [cMinute, setCMinute] = useState(0);
+  const [cSecond, setCSecond] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       let time = new Date();
-      let myHour = time.getHours();
-      const finalMyHour = myHour > 12 ? myHour - 12 : myHour;
-
-      setClock(
-        finalMyHour +
-          "시 " +
-          time.getMinutes() +
-          "분 " +
-          time.getSeconds() +
-          "초"
-      );
+      setCHour(time.getHours() > 12 ? time.getHours() - 12 : time.getHours());
+      setCMinute(time.getMinutes());
+      setCSecond(time.getSeconds());
     }, 1000);
     console.log("mount!");
 
@@ -31,16 +25,18 @@ export default function Clock() {
     <div className="w-full h-full bg-white  rounded-3xl shadow-xl p-3">
       <div className="w-full h-full flex justify-center items-center ">
         <div className="relative flex justify-center  w-full h-full items-center ">
-          <div className="">
-            <span className="text-4xl">{clock}</span>
-          </div>
-          <div className="absolute left-1">
-            <Lottie
-              options={clockOptions}
-              height={40}
-              width={40}
-              isClickToPauseDisabled={true}
-            />
+          <div className="flex justify-between w-full px-4">
+            <div>
+              <Lottie
+                options={clockOptions}
+                height={40}
+                width={40}
+                isClickToPauseDisabled={true}
+              />
+            </div>
+            <div className="text-3xl">{`${cHour}시`}</div>
+            <div className="text-3xl">{`${cMinute}분`}</div>
+            <div className="text-3xl">{`${cSecond}초`}</div>
           </div>
         </div>
       </div>

@@ -13,14 +13,15 @@ import Lottie from "react-lottie";
 
 export default function Forecast() {
   const [currentGrade, setCurrentGrade] = useState("");
-  const { data: dustData, loading: dustDataLoading } = useQuery<IDustGql>(
-    GET_DUST,
-    {
-      variables: {
-        stationName: "횡성읍",
-      },
-    }
-  );
+  const {
+    data: dustData,
+    loading: dustDataLoading,
+    refetch: dustRefetch,
+  } = useQuery<IDustGql>(GET_DUST, {
+    variables: {
+      stationName: "횡성읍",
+    },
+  });
   const { data: weatherData, loading: weatherDataLoading } =
     useQuery<IWeatherGql>(GET_WEATHER);
   //가지고는 왔는데 무슨 타입인지 체크가 필요함..
@@ -47,8 +48,16 @@ export default function Forecast() {
   };
 
   useEffect(() => {
-    checkMsg();
-  }, [checkMsg, currentGrade]);
+    const intercalId = setInterval(() => {
+      dustRefetch();
+      console.log("REFETCH!!!");
+      checkMsg();
+    }, 1000 * 60 * 60);
+
+    return () => {
+      clearInterval(intercalId);
+    };
+  }, [dustRefetch, checkMsg, currentGrade]);
 
   const checkDust = () => {
     const pm10Result = parseInt(dustData?.dust.pm10Grade!);

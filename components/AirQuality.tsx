@@ -18,8 +18,11 @@ import {
 import todayData from "@/modules/dayjs";
 
 export default function AirQuality() {
-  const { data: weatherGuessData, loading: weatherGuessLoading } =
-    useQuery<IWeatherGuessGql>(GET_WEATHER_GUESS);
+  const {
+    data: weatherGuessData,
+    loading: weatherGuessLoading,
+    refetch: weatherGuessRefetch,
+  } = useQuery<IWeatherGuessGql>(GET_WEATHER_GUESS);
 
   //강수확률
   const pop = weatherGuessData?.allWeatherGuess.find(function (item) {
