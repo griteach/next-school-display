@@ -7,7 +7,7 @@ import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 
 interface Weather {
   id: string;
-  baseData: string;
+  baseDate: string;
   baseTime: string;
   category: string;
   nx: number;

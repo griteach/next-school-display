@@ -45,9 +45,12 @@ export default function Forecast() {
     } else {
       setCurrentGrade("확인필요");
     }
+    console.log("현 미세먼지 상태: ", currentGrade);
   };
 
+  //1시간 주기로 데이터 갱신시키기
   useEffect(() => {
+    checkMsg();
     const intercalId = setInterval(() => {
       dustRefetch();
       console.log("REFETCH!!!");
@@ -90,7 +93,7 @@ export default function Forecast() {
   return (
     <>
       <div className="w-full h-full bg-gradient-to-r from-weather-l to-weather-r rounded-3xl grid grid-cols-2 grid-rows-[2fr_1fr] shadow-xl">
-        <div className="flex flex-col justify-center items-center p-4">
+        <div className="flex flex-col justify-center items-center px-4">
           <div className="">
             {dustDataLoading ? (
               <Lottie
@@ -111,7 +114,8 @@ export default function Forecast() {
           <div>
             <div className="text-xl text-white ">
               {/* 여기에 메세지 입력 */}
-              {currentGrade}
+              <span>{currentGrade}</span>
+              <span>{`${dustData?.dust.dataTime}, ${t1h?.baseDate}`}</span>
             </div>
           </div>
         </div>
