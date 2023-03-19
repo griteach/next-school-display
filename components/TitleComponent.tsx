@@ -8,7 +8,9 @@ export default function TitleComponent({ title }: ITitleComponentProps) {
   return (
     <div className="w-full h-full bg-white rounded-3xl shadow-xl flex flex-col justify-center items-center ">
       <div>
-        <h6 className="text-5xl font-gwe_bold">{title}</h6>
+        <h6 className="text-5xl font-gwe_bold bg-gradient-to-r from-mojito-r to-mojito-l bg-clip-text text-transparent ">
+          {title}
+        </h6>
       </div>
       <div>
         <p className="text-2xl mt-4">삶과 앎이 영그는 모두가 행복한 학교</p>

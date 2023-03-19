@@ -22,7 +22,7 @@ export default function Clock() {
     };
   }, []);
   return (
-    <div className="font-gwe_bold  w-full h-full bg-white  rounded-3xl shadow-xl p-3">
+    <div className="font-gwe  w-full h-full bg-white  rounded-3xl shadow-xl p-3">
       <div className="w-full h-full flex justify-center items-center ">
         <div className="relative flex justify-center  w-full h-full items-center ">
           <div className="flex justify-between w-full px-4">
@@ -34,9 +34,9 @@ export default function Clock() {
                 isClickToPauseDisabled={true}
               />
             </div>
-            <div className="text-3xl">{`${cHour}시`}</div>
-            <div className="text-3xl">{`${cMinute}분`}</div>
-            <div className="text-3xl">{`${cSecond}초`}</div>
+            <div className="text-6xl">{`${cHour}시`}</div>
+            <div className="text-6xl">{`${cMinute}분`}</div>
+            <div className="text-6xl">{`${cSecond}초`}</div>
           </div>
         </div>
       </div>

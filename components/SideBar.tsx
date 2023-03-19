@@ -6,7 +6,7 @@ import Clock from "./Clock";
 
 export default function SideBar({ title }: ITitleComponentProps) {
   return (
-    <div className="bg-[#F0E4F2]  h-full w-full grid grid-cols-1  grid-rows-[2fr_3fr_2fr_2fr] rounded-2xl">
+    <div className="bg-cyan-50  h-full w-full grid grid-cols-1  grid-rows-[2fr_3fr_2fr_2fr] rounded-2xl">
       <div className="rounded-tl-2xl rounded-tr-2xl p-4">
         <TitleComponent title={title} />
       </div>

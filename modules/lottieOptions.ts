@@ -10,6 +10,19 @@ import LottieEtcLoading from "../pages/lottie/etc/loading.json";
 //시계 로띠에 파일 임포트
 import LottieClock from "../pages/lottie/etc/clock.json";
 
+//working 공사중 파일 임포트
+import LottieWorking from "../pages/lottie/etc/working.json";
+
+//메인화면 공사중... 아이콘 로띠에 옵션
+export const workingOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: LottieWorking,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
 //미세먼지 아이콘 로띠에 옵션
 export const dustCryingOptions = {
   loop: true,
