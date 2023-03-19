@@ -15,6 +15,8 @@ module.exports = {
         "weather-r": "#7B63ED",
         "rea-l": "#799F0C",
         "rea-r": "#FFE000",
+        "dust-l": "#CCCCB2",
+        "dust-r": "#757519",
       },
     },
   },

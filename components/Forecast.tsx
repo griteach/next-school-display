@@ -13,10 +13,13 @@ import Lottie from "react-lottie";
 
 export default function Forecast() {
   const GOOD_SKY_BG_COLOR = "bg-gradient-to-r from-weather-l to-weather-r";
-  const BAD_SKY_BG_COLOR = "bg-gradient-to-r from-rea-l to-rea-r";
+  const BAD_SKY_BG_COLOR = "bg-gradient-to-r from-dust-l to-dust-r";
 
   const [bgColor, setBgColor] = useState(GOOD_SKY_BG_COLOR);
-  const [currentGrade, setCurrentGrade] = useState("");
+  const [currentMsg, setCurrentMsg] = useState("");
+  const [currentPm10Grade, setCurrentPm10Grade] = useState("");
+  const [currentPm25Grade, setCurrentPm25Grade] = useState("");
+
   const {
     data: dustData,
     loading: dustDataLoading,
@@ -26,6 +29,7 @@ export default function Forecast() {
       stationName: "횡성읍",
     },
   });
+
   const { data: weatherData, loading: weatherDataLoading } =
     useQuery<IWeatherGql>(GET_WEATHER);
   //가지고는 왔는데 무슨 타입인지 체크가 필요함..
@@ -41,32 +45,16 @@ export default function Forecast() {
     const pm10Result = parseInt(dustData?.dust.pm10Grade!);
     const pm25Result = parseInt(dustData?.dust.pm25Grade!);
     if (pm10Result > 2 || pm25Result > 2) {
-      setCurrentGrade("야외활동 금지!");
+      setCurrentMsg("야외활동 금지!");
     } else if (pm10Result > 1 || pm25Result > 1) {
-      setCurrentGrade("나가도 좋아요!");
+      setCurrentMsg("나가도 좋아요!");
     } else if (pm10Result == 1 && pm25Result == 1) {
-      setCurrentGrade("깨끗한 하늘!");
+      setCurrentMsg("깨끗한 하늘!");
     } else {
-      setCurrentGrade("확인필요");
+      setCurrentMsg("확인필요");
     }
-    console.log("현 미세먼지 상태: ", currentGrade);
+    console.log("현 미세먼지 상태: ", currentMsg);
   };
-
-  //1시간 주기로 데이터 갱신시키기
-  useEffect(() => {
-    checkMsg();
-    changeBackgroudColor(checkGrade());
-    const intercalId = setInterval(() => {
-      dustRefetch();
-      console.log("REFETCH!!!");
-      checkMsg();
-    }, 1000 * 60 * 60);
-
-    return () => {
-      clearInterval(intercalId);
-    };
-  }, [dustRefetch, checkMsg, currentGrade]);
-
   const checkDust = () => {
     const pm10Result = parseInt(dustData?.dust.pm10Grade!);
     const pm25Result = parseInt(dustData?.dust.pm25Grade!);
@@ -91,16 +79,51 @@ export default function Forecast() {
         return "나쁨";
       case "4":
         return "매우나쁨";
+      default:
+        return "확인필요";
     }
   };
 
-  const changeBackgroudColor = (sky: string) => {
-    if (sky === ("좋음" || "보통")) {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const checkCurrentGrade = () => {
+    setCurrentPm10Grade(dustData?.dust.pm10Grade!);
+    setCurrentPm25Grade(dustData?.dust.pm25Grade!);
+    console.log("Current pm 10 & 25 grade setting complete!");
+  };
+  const changeBackgroudColor = (pm10Grade: string, pm25Grade: string) => {
+    if (pm10Grade === ("좋음" || "보통") && pm25Grade === ("보통" || "좋음")) {
       setBgColor(GOOD_SKY_BG_COLOR);
+      console.log("setBgColor GOOD!");
     } else {
       setBgColor(BAD_SKY_BG_COLOR);
+      console.log("setBgColor BAD!");
     }
   };
+
+  //1시간 주기로 데이터 갱신시키기
+  useEffect(() => {
+    checkMsg();
+    checkCurrentGrade();
+    changeBackgroudColor(currentPm10Grade, currentPm25Grade);
+    const intercalId = setInterval(() => {
+      dustRefetch();
+      console.log("REFETCH!!!");
+      checkMsg();
+      checkCurrentGrade();
+      changeBackgroudColor(currentPm10Grade, currentPm25Grade);
+    }, 1000 * 60 * 60);
+
+    return () => {
+      clearInterval(intercalId);
+    };
+  }, [
+    dustRefetch,
+    checkMsg,
+    currentMsg,
+    checkCurrentGrade,
+    currentPm10Grade,
+    currentPm25Grade,
+  ]);
 
   return (
     <>
@@ -129,7 +152,7 @@ export default function Forecast() {
           <div>
             <div className="text-xl text-white ">
               {/* 여기에 메세지 입력 */}
-              <span>{currentGrade}</span>
+              <span>{currentMsg}</span>
             </div>
           </div>
         </div>
