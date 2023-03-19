@@ -13,6 +13,8 @@ module.exports = {
         "mojito-r": "#0052D4",
         "weather-l": "#E062E6",
         "weather-r": "#7B63ED",
+        "rea-l": "#799F0C",
+        "rea-r": "#FFE000",
       },
     },
   },

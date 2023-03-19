@@ -76,7 +76,6 @@ export default function AirQuality() {
           </div>
           <div className="ml-2">
             <span>오늘의 날씨</span>
-            <span>{`${wsd?.baseTime}, ${wsd?.baseDate} `}</span>
           </div>
         </div>
         <div className="w-full h-full  flex flex-col justify-center items-center p-4 ">
