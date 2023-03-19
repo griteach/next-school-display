@@ -15,11 +15,18 @@ export default function Forecast() {
   const GOOD_SKY_BG_COLOR = "bg-gradient-to-r from-weather-l to-weather-r";
   const BAD_SKY_BG_COLOR = "bg-gradient-to-r from-dust-l to-dust-r";
 
+  //배경색 관리 state
   const [bgColor, setBgColor] = useState(GOOD_SKY_BG_COLOR);
+
+  //미세먼지 안내 메세지 (나가도 좋아요, 등)
   const [currentMsg, setCurrentMsg] = useState("");
+
+  //현재 grade 농도 값
   const [currentPm10Grade, setCurrentPm10Grade] = useState("");
   const [currentPm25Grade, setCurrentPm25Grade] = useState("");
 
+  //횡성읍으로 보내기.
+  //여기를 각 학교별 가까운 스테이션으로 바꿔줘야함.
   const {
     data: dustData,
     loading: dustDataLoading,
@@ -30,16 +37,20 @@ export default function Forecast() {
     },
   });
 
+  //useQuery로 날씨 데이터 가져옴.
+  //RN1(1시간강수량), T1H(기온), UUU(동서바람성분), VVV(남북바람성분), WSD(풍속)
   const { data: weatherData, loading: weatherDataLoading } =
     useQuery<IWeatherGql>(GET_WEATHER);
   //가지고는 왔는데 무슨 타입인지 체크가 필요함..
 
+  //현재기온
   const t1h = weatherData?.allWeather.find(function (item) {
     if (item.category === "T1H") {
       return item.obsrValue;
     }
   });
 
+  //메세지 체크하기 : 좋아요. 안돼요 등
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkMsg = () => {
     const pm10Result = parseInt(dustData?.dust.pm10Grade!);
@@ -55,7 +66,9 @@ export default function Forecast() {
     }
     console.log("현 미세먼지 상태: ", currentMsg);
   };
-  const checkDust = () => {
+
+  //pm 수치를 사용하여 lottie 선택하기(옵션값 변경하여)
+  const makeLottieOptions = () => {
     const pm10Result = parseInt(dustData?.dust.pm10Grade!);
     const pm25Result = parseInt(dustData?.dust.pm25Grade!);
     if (pm10Result > 2 || pm25Result > 2) {
@@ -69,6 +82,7 @@ export default function Forecast() {
     }
   };
 
+  //좋음, 보통, 나쁨, 매우나쁨 등
   const checkGrade = (dustGrade: string) => {
     switch (dustGrade) {
       case "1":
@@ -84,12 +98,15 @@ export default function Forecast() {
     }
   };
 
+  //현재 값 저장하기 (useState)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkCurrentGrade = () => {
     setCurrentPm10Grade(dustData?.dust.pm10Grade!);
     setCurrentPm25Grade(dustData?.dust.pm25Grade!);
     console.log("Current pm 10 & 25 grade setting complete!");
   };
+
+  //pm 값에 따라 배경 색상 변경하기
   const changeBackgroudColor = (pm10Grade: string, pm25Grade: string) => {
     if (pm10Grade === ("좋음" || "보통") && pm25Grade === ("보통" || "좋음")) {
       setBgColor(GOOD_SKY_BG_COLOR);
@@ -141,16 +158,16 @@ export default function Forecast() {
               />
             ) : (
               <Lottie
-                options={checkDust()!}
-                height={90}
-                width={90}
+                options={makeLottieOptions()!}
+                height={120}
+                width={120}
                 isClickToPauseDisabled={true}
               />
             )}
           </div>
 
           <div>
-            <div className="text-xl text-white ">
+            <div className="text-3xl text-white ">
               {/* 여기에 메세지 입력 */}
               <span>{currentMsg}</span>
             </div>
@@ -159,17 +176,17 @@ export default function Forecast() {
         <div className="flex flex-col justify-center items-center">
           <div className="text-white flex">
             <div className="flex justify-center items-center">
-              <ThermometerSimple size={24} />
+              <ThermometerSimple size={40} />
             </div>
 
-            <span className="text-6xl">{t1h?.obsrValue}</span>
-            <span className="text-6xl">°</span>
+            <span className="text-7xl ">{t1h?.obsrValue}</span>
+            <span className="text-5xl">°</span>
           </div>
         </div>
         <div className="flex flex-col justify-center items-start col-span-2 px-10 text-white">
           <div className="w-full grid grid-cols-3 gird-rows-1 justify-items-start items-center">
-            <div className="">미세먼지</div>
-            <div className="text-2xl justify-self-end">
+            <div className="text-2xl">미세먼지</div>
+            <div className="text-3xl justify-self-end">
               {dustDataLoading ? (
                 <Lottie
                   options={etcLoadingOptions}
@@ -181,7 +198,7 @@ export default function Forecast() {
                 checkGrade(dustData?.dust.pm10Grade!)
               )}
             </div>
-            <div className="justify-self-end">
+            <div className="text-2xl justify-self-end">
               {dustDataLoading ? (
                 <Lottie
                   options={etcLoadingOptions}
@@ -196,8 +213,8 @@ export default function Forecast() {
             </div>
           </div>
           <div className="w-full grid grid-cols-3 gird-rows-1 justify-items-start items-center">
-            <div className="">초미세먼지</div>
-            <div className="justify-self-end text-2xl  ">
+            <div className="w-full text-2xl ">초미세먼지</div>
+            <div className=" justify-self-end text-3xl  ">
               {dustDataLoading ? (
                 <Lottie
                   options={etcLoadingOptions}
@@ -209,7 +226,7 @@ export default function Forecast() {
                 checkGrade(dustData?.dust.pm25Grade!)
               )}
             </div>
-            <div className="justify-self-end">
+            <div className="text-2xl justify-self-end">
               {dustDataLoading ? (
                 <Lottie
                   options={etcLoadingOptions}
@@ -223,7 +240,7 @@ export default function Forecast() {
               ㎍/m³
             </div>
           </div>
-          <div className="w-full flex justify-end pb-2 pt-1 text-xs">{`업데이트: ${dustData?.dust.dataTime}`}</div>
+          <div className="w-full flex justify-end pb-2 pt-1 text-base ">{`업데이트: ${dustData?.dust.dataTime}`}</div>
         </div>
       </div>
     </>

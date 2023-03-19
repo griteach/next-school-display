@@ -69,38 +69,38 @@ export default function AirQuality() {
   });
   return (
     <>
-      <div className="bg-white w-full h-full rounded-3xl shadow-xl flex flex-col ">
+      <div className="bg-white w-full h-full   rounded-3xl shadow-xl flex flex-col ">
         <div className="flex justify-start items-center pl-4 pt-4 ">
           <div>
-            <CloudFog size={32} color="#938FF2" />
+            <CloudFog size={40} color="#938FF2" />
           </div>
           <div className="ml-2">
-            <span>오늘의 날씨</span>
+            <span className="text-2xl">오늘의 날씨</span>
           </div>
         </div>
         <div className="w-full h-full  flex flex-col justify-center items-center p-4 ">
           <div className="w-full h-1/2  flex justify-evenly items-center">
             <div className="w-1/3 h-full  flex justify-center items-center">
               <div>
-                <Drop size={28} color="#938FF2" />
+                <Drop size={40} color="#938FF2" />
               </div>
-              <div className="w-2/3 h-full flex flex-col justify-center items-start text-xs ml-1">
+              <div className="w-2/3 h-full flex flex-col justify-center items-start text-lg ml-1">
                 <div>강수량</div>
                 <div>{rn1?.obsrValue}</div>
               </div>
             </div>
-            <div className="w-1/3 h-full  flex justify-center items-center text-xs">
+            <div className="w-1/3 h-full  flex justify-center items-center text-lg ">
               <div>
-                <Wind size={28} color="#938FF2" />
+                <Wind size={40} color="#938FF2" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
                 <div>바람세기</div>
                 <div>{wsd?.obsrValue}m/s</div>
               </div>
             </div>
-            <div className="w-1/3 h-full  flex justify-center items-center text-xs">
+            <div className="w-1/3 h-full  flex justify-center items-center text-lg">
               <div>
-                <ThermometerHot size={32} color="#938FF2" />
+                <ThermometerHot size={40} color="#938FF2" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
                 <div>최고기온</div>
@@ -113,25 +113,25 @@ export default function AirQuality() {
           <div className="w-full h-1/2  flex justify-evenly items-center">
             <div className="w-1/3 h-full  flex justify-center items-center">
               <div>
-                <Umbrella size={28} color="#938FF2" />
+                <Umbrella size={40} color="#938FF2" />
               </div>
-              <div className="w-2/3 h-full flex flex-col justify-center items-start text-xs ml-1">
+              <div className="w-2/3 h-full flex flex-col justify-center items-start text-lg ml-1">
                 <div>비올확률</div>
                 <div>{`${pop?.fcstValue}%`}</div>
               </div>
             </div>
-            <div className="w-1/3 h-full  flex justify-center items-center text-xs">
+            <div className="w-1/3 h-full  flex justify-center items-center text-lg">
               <div>
-                <DropHalf size={28} color="#938FF2" />
+                <DropHalf size={40} color="#938FF2" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
                 <div>습도</div>
                 <div>{reh?.obsrValue}%</div>
               </div>
             </div>
-            <div className="w-1/3 h-full  flex justify-center items-center text-xs">
+            <div className="w-1/3 h-full  flex justify-center items-center text-lg">
               <div>
-                <ThermometerCold size={32} color="#938FF2" />
+                <ThermometerCold size={40} color="#938FF2" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
                 <div>최저기온</div>

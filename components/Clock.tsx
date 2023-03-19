@@ -14,15 +14,15 @@ export default function Clock() {
       setCMinute(time.getMinutes());
       setCSecond(time.getSeconds());
     }, 1000);
-    console.log("mount!");
+    console.log("clock mount!");
 
     return () => {
       clearInterval(timer);
-      console.log("unmount!");
+      console.log("clock unmount!");
     };
   }, []);
   return (
-    <div className="w-full h-full bg-white  rounded-3xl shadow-xl p-3">
+    <div className="font-gwe_bold  w-full h-full bg-white  rounded-3xl shadow-xl p-3">
       <div className="w-full h-full flex justify-center items-center ">
         <div className="relative flex justify-center  w-full h-full items-center ">
           <div className="flex justify-between w-full px-4">

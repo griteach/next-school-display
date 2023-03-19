@@ -53,6 +53,7 @@ export interface IDustGql {
   };
 }
 
+//지역으로 미세먼지 검색하기.
 export const GET_DUST = gql`
   query dust($stationName: String!) {
     dust(stationName: $stationName) {
@@ -73,6 +74,9 @@ export const GET_DUST = gql`
     }
   }
 `;
+
+//초단기 실황값
+//RN1, T1H, UUU, VVV, WSD
 export const GET_WEATHER = gql`
   query {
     allWeather {
@@ -85,6 +89,7 @@ export const GET_WEATHER = gql`
   }
 `;
 
+//단기예보
 export const GET_WEATHER_GUESS = gql`
   query {
     allWeatherGuess {
