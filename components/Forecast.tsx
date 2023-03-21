@@ -108,10 +108,17 @@ export default function Forecast() {
 
   //pm 값에 따라 배경 색상 변경하기
   const changeBackgroudColor = (pm10Grade: string, pm25Grade: string) => {
-    if (pm10Grade === ("좋음" || "보통") && pm25Grade === ("보통" || "좋음")) {
+    const pm10 = parseInt(pm10Grade);
+    const pm25 = parseInt(pm25Grade);
+
+    if (pm10 <= 2 && pm25 <= 2) {
+      console.log(pm10Grade);
+      console.log(pm25Grade);
       setBgColor(GOOD_SKY_BG_COLOR);
       console.log("setBgColor GOOD!");
     } else {
+      console.log(pm10Grade);
+      console.log(pm25Grade);
       setBgColor(BAD_SKY_BG_COLOR);
       console.log("setBgColor BAD!");
     }
@@ -240,7 +247,7 @@ export default function Forecast() {
               ㎍/m³
             </div>
           </div>
-          <div className="w-full flex justify-end pb-2 pt-1 text-base ">{`업데이트: ${dustData?.dust.dataTime}`}</div>
+          <div className="w-full flex justify-end pb-2 pt-1 text-base ">{`업데이트: ${t1h?.baseTime}`}</div>
         </div>
       </div>
     </>
