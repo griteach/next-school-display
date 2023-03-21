@@ -1,6 +1,8 @@
 import {
+  GET_DUST,
   GET_WEATHER,
   GET_WEATHER_GUESS,
+  IDustGql,
   IWeatherGql,
   IWeatherGuessGql,
 } from "@/modules/apollo";
@@ -16,8 +18,19 @@ import {
 } from "phosphor-react";
 
 import todayData from "@/modules/dayjs";
+import { useEffect } from "react";
 
 export default function AirQuality() {
+  const {
+    data: dustData,
+    loading: dustDataLoading,
+    refetch: dustRefetch,
+  } = useQuery<IDustGql>(GET_DUST, {
+    variables: {
+      stationName: "횡성읍",
+    },
+  });
+
   const {
     data: weatherGuessData,
     loading: weatherGuessLoading,
@@ -45,8 +58,11 @@ export default function AirQuality() {
     }
   });
 
-  const { data: weatherData, loading: weatherDataLoading } =
-    useQuery<IWeatherGql>(GET_WEATHER);
+  const {
+    data: weatherData,
+    loading: weatherDataLoading,
+    refetch: weatherDataRefetch,
+  } = useQuery<IWeatherGql>(GET_WEATHER);
   const reh = weatherData?.allWeather.find(function (item) {
     if (item.category === "REH") {
       return item;
@@ -57,16 +73,24 @@ export default function AirQuality() {
       return item;
     }
   });
-  const pty = weatherData?.allWeather.find(function (item) {
-    if (item.category === "PTY") {
-      return item;
-    }
-  });
   const rn1 = weatherData?.allWeather.find(function (item) {
     if (item.category === "RN1") {
       return item;
     }
   });
+
+  useEffect(() => {
+    const intercalId = setInterval(() => {
+      weatherDataRefetch();
+      console.log("weather Data REFETCH!!!");
+      weatherGuessRefetch();
+      console.log("weather Guess data REFETCH!!!");
+    }, 1000 * 60 * 60);
+
+    return () => {
+      clearInterval(intercalId);
+    };
+  }, [weatherDataRefetch, weatherGuessRefetch]);
   return (
     <>
       <div className="bg-white w-full h-full   rounded-3xl shadow-xl flex flex-col ">
@@ -103,7 +127,7 @@ export default function AirQuality() {
                 <ThermometerHot size={40} color="#938FF2" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
-                <div>최고기온</div>
+                <div>오존</div>
                 <div>
                   {tmx?.fcstValue != undefined ? tmx?.fcstValue : "확인중"}
                 </div>

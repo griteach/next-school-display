@@ -1,4 +1,11 @@
-import { GET_DUST, GET_WEATHER, IDustGql, IWeatherGql } from "@/modules/apollo";
+import {
+  GET_DUST,
+  GET_WEATHER,
+  GET_WEATHER_GUESS,
+  IDustGql,
+  IWeatherGql,
+  IWeatherGuessGql,
+} from "@/modules/apollo";
 import {
   dustCryingOptions,
   dustSmileOptions,
@@ -47,6 +54,22 @@ export default function Forecast() {
   const t1h = weatherData?.allWeather.find(function (item) {
     if (item.category === "T1H") {
       return item.obsrValue;
+    }
+  });
+  const {
+    data: weatherGuessData,
+    loading: weatherGuessLoading,
+    refetch: weatherGuessRefetch,
+  } = useQuery<IWeatherGuessGql>(GET_WEATHER_GUESS);
+
+  const tmn = weatherGuessData?.allWeatherGuess.find(function (item) {
+    if (item.category === "TMN") {
+      return item.fcstValue;
+    }
+  });
+  const tmx = weatherGuessData?.allWeatherGuess.find(function (item) {
+    if (item.category === "TMX") {
+      return item.fcstValue;
     }
   });
 
@@ -189,6 +212,11 @@ export default function Forecast() {
             <span className="text-7xl ">{t1h?.obsrValue}</span>
             <span className="text-5xl">°</span>
           </div>
+          <div className="text-white text-2xl flex justify-center items-center  ">{`${
+            tmx?.fcstValue != undefined ? parseInt(tmx?.fcstValue) : "확인중"
+          }°/ ${
+            tmn?.fcstValue != undefined ? parseInt(tmn?.fcstValue) : "확인중"
+          }°`}</div>
         </div>
         <div className="flex flex-col justify-center items-start col-span-2 px-10 text-white">
           <div className="w-full grid grid-cols-3 gird-rows-1 justify-items-start items-center">
