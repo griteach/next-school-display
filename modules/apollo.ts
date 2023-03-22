@@ -49,6 +49,12 @@ export interface IDustGql {
     pm25Grade: string;
     khaiGrade: string;
     khaiValue: string;
+    o3Grade: string;
+    o3Value: string;
+    no2Value: string;
+    no2Grade: string;
+    coValue: string;
+    coGrade: string;
     sidoName: string;
   };
 }
@@ -70,6 +76,12 @@ export const GET_DUST = gql`
       pm25Grade
       khaiGrade
       khaiValue
+      o3Grade
+      o3Value
+      coGrade
+      coValue
+      no2Grade
+      no2Value
       sidoName
     }
   }

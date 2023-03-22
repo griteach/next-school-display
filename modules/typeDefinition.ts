@@ -11,6 +11,12 @@ export interface IDust {
   pm25Value: string;
   pm25Value24: string;
   sidoName: string;
+  o3Value: string;
+  o3Grade: string;
+  no2Value: string;
+  no2Grade: string;
+  coValue: string;
+  coGrade: string;
   stationName: string;
 }
 export interface IGetDustResult {

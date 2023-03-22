@@ -32,6 +32,7 @@ const todayData = {
   day: today,
   day_dash: todayFormatDash,
   hour: currentHour + "00",
+  cHour: currentHour,
   tYear: titleYear,
   tMonth: titleMonth + 1,
   tDate: titleDate,

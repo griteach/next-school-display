@@ -6,6 +6,7 @@ import {
   IWeatherGql,
   IWeatherGuessGql,
 } from "@/modules/apollo";
+import todayData from "@/modules/dayjs";
 import {
   dustCryingOptions,
   dustSmileOptions,
@@ -106,8 +107,8 @@ export default function Forecast() {
   };
 
   //좋음, 보통, 나쁨, 매우나쁨 등
-  const checkGrade = (dustGrade: string) => {
-    switch (dustGrade) {
+  const checkGrade = (grade: string) => {
+    switch (grade) {
       case "1":
         return "좋음";
       case "2":
@@ -158,7 +159,7 @@ export default function Forecast() {
       checkMsg();
       checkCurrentGrade();
       changeBackgroudColor(currentPm10Grade, currentPm25Grade);
-    }, 1000 * 60 * 60);
+    }, 1000 * 60 * 30);
 
     return () => {
       clearInterval(intercalId);
@@ -275,7 +276,7 @@ export default function Forecast() {
               ㎍/m³
             </div>
           </div>
-          <div className="w-full flex justify-end pb-2 pt-1 text-base ">{`업데이트: ${t1h?.baseTime}`}</div>
+          <div className="w-full flex justify-end pb-2 pt-1 text-base ">{`업데이트: ${todayData.day_dash} ${todayData.cHour}시`}</div>
         </div>
       </div>
     </>

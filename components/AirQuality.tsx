@@ -19,6 +19,7 @@ import {
 
 import todayData from "@/modules/dayjs";
 import { useEffect } from "react";
+import checkGrade from "@/modules/check";
 
 export default function AirQuality() {
   const {
@@ -109,8 +110,12 @@ export default function AirQuality() {
                 <Drop size={40} color="#938FF2" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start text-lg ml-1">
-                <div>강수량</div>
-                <div>{rn1?.obsrValue}</div>
+                <div>일산화탄소</div>
+                <div>{`${
+                  dustDataLoading
+                    ? "확인중"
+                    : checkGrade(dustData?.dust.coGrade!)
+                }`}</div>
               </div>
             </div>
             <div className="w-1/3 h-full  flex justify-center items-center text-lg ">
@@ -128,9 +133,7 @@ export default function AirQuality() {
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
                 <div>오존</div>
-                <div>
-                  {tmx?.fcstValue != undefined ? tmx?.fcstValue : "확인중"}
-                </div>
+                <div>{`${checkGrade(dustData?.dust.o3Grade!)}`}</div>
               </div>
             </div>
           </div>
@@ -158,10 +161,8 @@ export default function AirQuality() {
                 <ThermometerCold size={40} color="#938FF2" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
-                <div>최저기온</div>
-                <div>
-                  {tmn?.fcstValue != undefined ? tmn?.fcstValue : "확인중"}
-                </div>
+                <div>이산화질소</div>
+                <div>{`${checkGrade(dustData?.dust.no2Grade!)}`}</div>
               </div>
             </div>
           </div>
