@@ -14,9 +14,10 @@ import {
   dustAwesomeOptions,
   etcLoadingOptions,
 } from "@/modules/lottieOptions";
+import { IDust } from "@/modules/typeDefinition";
 import { useQuery } from "@apollo/client";
 import { ThermometerSimple } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import Lottie from "react-lottie";
 
 export default function Forecast() {
@@ -42,13 +43,23 @@ export default function Forecast() {
   } = useQuery<IDustGql>(GET_DUST, {
     variables: {
       stationName: "횡성읍",
+      onCompleted: (dustData: {
+        getDustData: SetStateAction<IDust | null>;
+      }) => {
+        setDustState(dustData.getDustData);
+      },
     },
   });
 
+  const [dustState, setDustState] = useState<IDust | null>(null);
+
   //useQuery로 날씨 데이터 가져옴.
   //RN1(1시간강수량), T1H(기온), UUU(동서바람성분), VVV(남북바람성분), WSD(풍속)
-  const { data: weatherData, loading: weatherDataLoading } =
-    useQuery<IWeatherGql>(GET_WEATHER);
+  const {
+    data: weatherData,
+    loading: weatherDataLoading,
+    refetch: weatherDataRefetch,
+  } = useQuery<IWeatherGql>(GET_WEATHER);
   //가지고는 왔는데 무슨 타입인지 체크가 필요함..
 
   //현재기온
