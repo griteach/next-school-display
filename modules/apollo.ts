@@ -26,8 +26,41 @@ interface WeatherGuess {
   ny: number;
 }
 
+interface MediumLand {
+  regId: String;
+  rnSt3Am: number;
+  rnSt3Pm: number;
+  rnSt4Am: number;
+  rnSt4Pm: number;
+  rnSt5Am: number;
+  rnSt5Pm: number;
+  rnSt6Am: number;
+  rnSt6Pm: number;
+  rnSt7Am: number;
+  rnSt7Pm: number;
+  rnSt8: number;
+  rnSt9: number;
+  rnSt10: number;
+  wf3Am: string;
+  wf3Pm: string;
+  wf4Am: string;
+  wf4Pm: string;
+  wf5Am: string;
+  wf5Pm: string;
+  wf6Am: string;
+  wf6Pm: string;
+  wf7Am: string;
+  wf7Pm: string;
+  wf8: string;
+  wf9: string;
+  wf10: string;
+}
+
 export interface IWeatherGql {
   allWeather: Weather[];
+}
+export interface IMediumLandGql {
+  mediumLand: MediumLand;
 }
 
 export interface IWeatherGuessGql {
@@ -117,6 +150,39 @@ export const GET_WEATHER_GUESS = gql`
   }
 `;
 
+export const GET_MEDIUM_LAND = gql`
+  query {
+    mediumLand {
+      regId
+      rnSt10
+      rnSt3Pm
+      rnSt3Am
+      rnSt4Am
+      rnSt4Pm
+      rnSt5Am
+      rnSt5Pm
+      rnSt6Am
+      rnSt6Pm
+      rnSt7Am
+      rnSt7Pm
+      rnSt8
+      rnSt9
+      wf3Am
+      wf3Pm
+      wf4Am
+      wf4Pm
+      wf5Am
+      wf5Pm
+      wf6Am
+      wf6Pm
+      wf9
+      wf7Am
+      wf7Pm
+      wf8
+      wf10
+    }
+  }
+`;
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({

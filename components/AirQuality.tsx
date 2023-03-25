@@ -86,12 +86,14 @@ export default function AirQuality() {
       console.log("weather Data REFETCH!!!");
       weatherGuessRefetch();
       console.log("weather Guess data REFETCH!!!");
-    }, 1000 * 60 * 60);
+      dustRefetch();
+      console.log("dust data refetch!");
+    }, 1000 * 60 * 30);
 
     return () => {
       clearInterval(intercalId);
     };
-  }, [weatherDataRefetch, weatherGuessRefetch]);
+  }, [weatherDataRefetch, weatherGuessRefetch, dustRefetch]);
   return (
     <>
       <div className="bg-white w-full h-full   rounded-3xl shadow-xl flex flex-col ">

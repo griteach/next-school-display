@@ -6,7 +6,7 @@ import {
   IWeatherGql,
   IWeatherGuessGql,
 } from "@/modules/apollo";
-import todayData from "@/modules/dayjs";
+
 import {
   dustCryingOptions,
   dustSmileOptions,
@@ -287,7 +287,7 @@ export default function Forecast() {
               ㎍/m³
             </div>
           </div>
-          <div className="w-full flex justify-end pb-2 pt-1 text-base ">{`업데이트: ${todayData.day_dash} ${todayData.cHour}시`}</div>
+          <div className="w-full flex justify-end pb-2 pt-1 text-base ">{`업데이트: ${dustData?.dust.dataTime}시`}</div>
         </div>
       </div>
     </>
