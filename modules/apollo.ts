@@ -28,6 +28,8 @@ interface WeatherGuess {
 
 interface MediumLand {
   regId: String;
+
+  //강수 예보
   rnSt3Am: number;
   rnSt3Pm: number;
   rnSt4Am: number;
@@ -41,6 +43,7 @@ interface MediumLand {
   rnSt8: number;
   rnSt9: number;
   rnSt10: number;
+  //wf 날씨예보, 맑음 흐림, 구름 등등
   wf3Am: string;
   wf3Pm: string;
   wf4Am: string;
@@ -56,11 +59,67 @@ interface MediumLand {
   wf10: string;
 }
 
+interface MediumTemp {
+  regId: string;
+  taMin3: number;
+  taMin3Low: number;
+  taMin3High: number;
+  taMax3: number;
+  taMax3Low: number;
+  taMax3High: number;
+  taMin4: number;
+  taMin4Low: number;
+  taMin4High: number;
+  taMax4: number;
+  taMax4Low: number;
+  taMax4High: number;
+  taMin5: number;
+  taMin5Low: number;
+  taMin5High: number;
+  taMax5: number;
+  taMax5Low: number;
+  taMax5High: number;
+  taMin6: number;
+  taMin6Low: number;
+  taMin6High: number;
+  taMax6: number;
+  taMax6Low: number;
+  taMax6High: number;
+  taMin7: number;
+  taMin7Low: number;
+  taMin7High: number;
+  taMax7: number;
+  taMax7Low: number;
+  taMax7High: number;
+  taMin8: number;
+  taMin8Low: number;
+  taMin8High: number;
+  taMax8: number;
+  taMax8Low: number;
+  taMax8High: number;
+  taMin9: number;
+  taMin9Low: number;
+  taMin9High: number;
+  taMax9: number;
+  taMax9Low: number;
+  taMax9High: number;
+  taMin10: number;
+  taMin10Low: number;
+  taMin10High: number;
+  taMax10: number;
+  taMax10Low: number;
+  taMax10High: number;
+}
+
 export interface IWeatherGql {
   allWeather: Weather[];
 }
 export interface IMediumLandGql {
   mediumLand: MediumLand;
+}
+
+export interface IMediumTempGql {
+  mediumTemp: MediumTemp;
 }
 
 export interface IWeatherGuessGql {
@@ -180,6 +239,61 @@ export const GET_MEDIUM_LAND = gql`
       wf7Pm
       wf8
       wf10
+    }
+  }
+`;
+export const GET_MEDIUM_TEMP = gql`
+  query {
+    mediumTemp {
+      regId
+      taMin3
+      taMin3Low
+      taMin3High
+      taMax3
+      taMax3Low
+      taMax3High
+      taMin4
+      taMin4Low
+      taMin4High
+      taMax4
+      taMax4Low
+      taMax4High
+      taMin5
+      taMin5Low
+      taMin5High
+      taMax5
+      taMax5Low
+      taMax5High
+      taMin6
+      taMin6Low
+      taMin6High
+      taMax6
+      taMax6Low
+      taMax6High
+      taMin7
+      taMin7Low
+      taMin7High
+      taMax7
+      taMax7Low
+      taMax7High
+      taMin8
+      taMin8Low
+      taMin8High
+      taMax8
+      taMax8Low
+      taMax8High
+      taMin9
+      taMin9Low
+      taMin9High
+      taMax9
+      taMax9Low
+      taMax9High
+      taMin10
+      taMin10Low
+      taMin10High
+      taMax10
+      taMax10Low
+      taMax10High
     }
   }
 `;
