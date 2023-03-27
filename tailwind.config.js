@@ -23,6 +23,8 @@ module.exports = {
         "rea-r": "#FFE000",
         "dust-l": "#CCCCB2",
         "dust-r": "#757519",
+        "weather-clear-t": "#231BB1",
+        "weather-clear-b": "#91A4E1",
       },
     },
   },

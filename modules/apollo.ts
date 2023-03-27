@@ -209,6 +209,21 @@ export const GET_WEATHER_GUESS = gql`
   }
 `;
 
+export const GET_MEDIUM_WEATHER_GUESS = gql`
+  query {
+    mediumWeatherGuess {
+      baseDate
+      baseTime
+      category
+      fcstDate
+      fcstTime
+      fcstValue
+      nx
+      ny
+    }
+  }
+`;
+
 export const GET_MEDIUM_LAND = gql`
   query {
     mediumLand {
@@ -301,6 +316,7 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   uri: "http://iteach12.iptime.org:51212/",
+  // uri: "http://localhost:5001/",
   cache,
 });
 
