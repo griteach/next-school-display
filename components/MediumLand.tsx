@@ -92,7 +92,7 @@ export default function MediumLand() {
     refetch: mediumTempDataRefetch,
   } = useQuery<IMediumTempGql>(GET_MEDIUM_TEMP);
   return (
-    <div className="w-full h-full grid grid-cols-7 grid-rows-1">
+    <div className="w-full h-full grid grid-cols-7 grid-rows-1 gap-1">
       <div className="flex flex-col justify-center items-center">
         <div>내일</div>
       </div>
@@ -100,7 +100,7 @@ export default function MediumLand() {
         <div>모레</div>
       </div>
       <div
-        className={`flex flex-col justify-center items-center ${CLEAR_SKY_BG_COLOR} rounded-full`}
+        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
       >
         <div className="text-2xl text-white">{`${today
           .add(3, "day")
@@ -135,12 +135,17 @@ export default function MediumLand() {
           <div className="ml-1">{`${mediumData?.mediumLand.rnSt3Pm}%`}</div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-2xl">{`${today
+      <div
+        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+      >
+        <div className="text-2xl text-white">{`${today
           .add(4, "day")
           .locale("ko")
           .format("dd")}`}</div>
-        <div>{`${today.add(4, "day").locale("ko").format("MM/DD")}`}</div>
+        <div className="text-white">{`${today
+          .add(4, "day")
+          .locale("ko")
+          .format("MM/DD")}`}</div>
         <div>
           {mediumDataLoading ? (
             <Lottie
@@ -166,12 +171,17 @@ export default function MediumLand() {
           <div className="ml-1">{`${mediumData?.mediumLand.rnSt4Pm}%`}</div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-2xl">{`${today
+      <div
+        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+      >
+        <div className="text-2xl text-white">{`${today
           .add(5, "day")
           .locale("ko")
           .format("dd")}`}</div>
-        <div>{`${today.add(5, "day").locale("ko").format("MM/DD")}`}</div>
+        <div className="text-white">{`${today
+          .add(5, "day")
+          .locale("ko")
+          .format("MM/DD")}`}</div>
         <div>
           {mediumDataLoading ? (
             <Lottie
@@ -197,12 +207,17 @@ export default function MediumLand() {
           <div className="ml-1">{`${mediumData?.mediumLand.rnSt5Pm}%`}</div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-2xl">{`${today
+      <div
+        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+      >
+        <div className="text-2xl text-white">{`${today
           .add(6, "day")
           .locale("ko")
           .format("dd")}`}</div>
-        <div>{`${today.add(6, "day").locale("ko").format("MM/DD")}`}</div>
+        <div className="text-white">{`${today
+          .add(6, "day")
+          .locale("ko")
+          .format("MM/DD")}`}</div>
         <div>
           {mediumDataLoading ? (
             <Lottie
@@ -228,12 +243,17 @@ export default function MediumLand() {
           <div className="ml-1">{`${mediumData?.mediumLand.rnSt6Pm}%`}</div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-2xl">{`${today
+      <div
+        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+      >
+        <div className="text-2xl text-white">{`${today
           .add(7, "day")
           .locale("ko")
           .format("dd")}`}</div>
-        <div>{`${today.add(7, "day").locale("ko").format("MM/DD")}`}</div>
+        <div className="text-white">{`${today
+          .add(7, "day")
+          .locale("ko")
+          .format("MM/DD")}`}</div>
         <div>
           {mediumDataLoading ? (
             <Lottie
