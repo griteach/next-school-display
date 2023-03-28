@@ -315,8 +315,11 @@ export const GET_MEDIUM_TEMP = gql`
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
-  uri: "http://iteach12.iptime.org:51212/",
-  // uri: "http://localhost:5001/",
+  //Real Server
+  // uri: "http://iteach12.iptime.org:51212/",
+
+  //Dev Server
+  uri: "http://localhost:5001/",
   cache,
 });
 

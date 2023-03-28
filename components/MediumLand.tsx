@@ -17,6 +17,7 @@ import {
 import { Umbrella } from "phosphor-react";
 import { useQuery } from "@apollo/client";
 import Lottie from "react-lottie";
+import { after } from "node:test";
 
 export default function MediumLand() {
   const CLEAR_SKY_BG_COLOR =
@@ -46,6 +47,9 @@ export default function MediumLand() {
 
   // 현재 날짜를 가져옵니다.
   const today = dayjs();
+  const tomorrow = today.add(1, "day").format("YYYYMMDD");
+  const afterTomorrow = today.add(2, "day").format("YYYYMMDD");
+  console.log(`오늘: ${today}, 내일: ${tomorrow}, 모레: ${afterTomorrow}`);
 
   //단기예보
   const {
@@ -53,18 +57,34 @@ export default function MediumLand() {
     loading: weatherGuessLoading,
     refetch: weatherGuessRefetch,
   } = useQuery<IWeatherGuessGql>(GET_WEATHER_GUESS);
-  const sky = weatherGuessData?.allWeatherGuess.find(function (item) {
-    if (item.category === "SKY") {
-      return item.fcstValue;
-    }
+  const sky = weatherGuessData?.allWeatherGuess.filter(function (item) {
+    return item.category === "SKY";
+  });
+
+  console.log(sky);
+  const tomorrowWeather = sky?.filter(function (item) {
+    return (
+      item.fcstDate === today.add(1, "day").format("YYYYMMDD") &&
+      item.fcstTime === "1100"
+    );
+  });
+
+  const afterTomorrowWeather = sky?.filter(function (item) {
+    return (
+      item.fcstDate === today.add(2, "day").format("YYYYMMDD") &&
+      item.fcstTime === "1100"
+    );
   });
 
   const makeMediumLottieOptions = (value: string) => {
     switch (value) {
       case "맑음":
+      case "1":
         return mediumSunnyOptions;
       case "구름많음":
+      case "3":
         return mediumWindyOptions;
+
       default:
         return mediumWindyOptions;
     }
@@ -94,8 +114,38 @@ export default function MediumLand() {
   return (
     <div className="w-full h-full">
       <div className="w-full h-full  grid grid-cols-7 grid-rows-1 gap-1">
-        <div className="flex flex-col justify-center items-center">
-          <div>내일</div>
+        <div
+          className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+        >
+          <div className="text-3xl text-white">내일</div>
+          <div className="text-white">{`${today
+            .add(1, "day")
+            .locale("ko")
+            .format("MM/DD")}`}</div>
+          <div>
+            {weatherGuessLoading ? (
+              <Lottie
+                options={etcLoadingOptions}
+                height={30}
+                width={30}
+                isClickToPauseDisabled={true}
+              />
+            ) : (
+              <Lottie
+                options={makeMediumLottieOptions(mediumData?.mediumLand.wf3Pm!)}
+                height={70}
+                width={70}
+                isClickToPauseDisabled={true}
+              />
+            )}
+          </div>
+          <div className="text-base">{`${mediumTempData?.mediumTemp.taMax3}° / ${mediumTempData?.mediumTemp.taMin3}°`}</div>
+          <div className="flex justify-center items-center">
+            <div>
+              <Umbrella size={30} color="#938FF2" />
+            </div>
+            <div className="ml-1">{`${mediumData?.mediumLand.rnSt3Pm}%`}</div>
+          </div>
         </div>
         <div className="flex flex-col justify-center items-center">
           <div>모레</div>
