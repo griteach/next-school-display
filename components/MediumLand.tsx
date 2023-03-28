@@ -92,191 +92,193 @@ export default function MediumLand() {
     refetch: mediumTempDataRefetch,
   } = useQuery<IMediumTempGql>(GET_MEDIUM_TEMP);
   return (
-    <div className="w-full h-full grid grid-cols-7 grid-rows-1 gap-1">
-      <div className="flex flex-col justify-center items-center">
-        <div>내일</div>
-      </div>
-      <div className="flex flex-col justify-center items-center">
-        <div>모레</div>
-      </div>
-      <div
-        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
-      >
-        <div className="text-2xl text-white">{`${today
-          .add(3, "day")
-          .locale("ko")
-          .format("dd")}`}</div>
-        <div className="text-white">{`${today
-          .add(3, "day")
-          .locale("ko")
-          .format("MM/DD")}`}</div>
-        <div>
-          {mediumDataLoading ? (
-            <Lottie
-              options={etcLoadingOptions}
-              height={30}
-              width={30}
-              isClickToPauseDisabled={true}
-            />
-          ) : (
-            <Lottie
-              options={makeMediumLottieOptions(mediumData?.mediumLand.wf3Pm!)}
-              height={50}
-              width={50}
-              isClickToPauseDisabled={true}
-            />
-          )}
+    <div className="w-full h-full">
+      <div className="w-full h-full  grid grid-cols-7 grid-rows-1 gap-1">
+        <div className="flex flex-col justify-center items-center">
+          <div>내일</div>
         </div>
-        <div className="text-sm">{`${mediumTempData?.mediumTemp.taMax3}° / ${mediumTempData?.mediumTemp.taMin3}°`}</div>
-        <div className="flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
+          <div>모레</div>
+        </div>
+        <div
+          className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+        >
+          <div className="text-3xl text-white">{`${today
+            .add(3, "day")
+            .locale("ko")
+            .format("dd")}`}</div>
+          <div className="text-white">{`${today
+            .add(3, "day")
+            .locale("ko")
+            .format("MM/DD")}`}</div>
           <div>
-            <Umbrella size={20} color="#938FF2" />
+            {mediumDataLoading ? (
+              <Lottie
+                options={etcLoadingOptions}
+                height={30}
+                width={30}
+                isClickToPauseDisabled={true}
+              />
+            ) : (
+              <Lottie
+                options={makeMediumLottieOptions(mediumData?.mediumLand.wf3Pm!)}
+                height={70}
+                width={70}
+                isClickToPauseDisabled={true}
+              />
+            )}
           </div>
-          <div className="ml-1">{`${mediumData?.mediumLand.rnSt3Pm}%`}</div>
+          <div className="text-base">{`${mediumTempData?.mediumTemp.taMax3}° / ${mediumTempData?.mediumTemp.taMin3}°`}</div>
+          <div className="flex justify-center items-center">
+            <div>
+              <Umbrella size={30} color="#938FF2" />
+            </div>
+            <div className="ml-1">{`${mediumData?.mediumLand.rnSt3Pm}%`}</div>
+          </div>
         </div>
-      </div>
-      <div
-        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
-      >
-        <div className="text-2xl text-white">{`${today
-          .add(4, "day")
-          .locale("ko")
-          .format("dd")}`}</div>
-        <div className="text-white">{`${today
-          .add(4, "day")
-          .locale("ko")
-          .format("MM/DD")}`}</div>
-        <div>
-          {mediumDataLoading ? (
-            <Lottie
-              options={etcLoadingOptions}
-              height={30}
-              width={30}
-              isClickToPauseDisabled={true}
-            />
-          ) : (
-            <Lottie
-              options={makeMediumLottieOptions(mediumData?.mediumLand.wf4Pm!)}
-              height={50}
-              width={50}
-              isClickToPauseDisabled={true}
-            />
-          )}
-        </div>
-        <div className="text-sm">{`${mediumTempData?.mediumTemp.taMax4}° / ${mediumTempData?.mediumTemp.taMin4}°`}</div>
-        <div className="flex justify-center items-center">
+        <div
+          className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+        >
+          <div className="text-3xl text-white">{`${today
+            .add(4, "day")
+            .locale("ko")
+            .format("dd")}`}</div>
+          <div className="text-white">{`${today
+            .add(4, "day")
+            .locale("ko")
+            .format("MM/DD")}`}</div>
           <div>
-            <Umbrella size={20} color="#938FF2" />
+            {mediumDataLoading ? (
+              <Lottie
+                options={etcLoadingOptions}
+                height={30}
+                width={30}
+                isClickToPauseDisabled={true}
+              />
+            ) : (
+              <Lottie
+                options={makeMediumLottieOptions(mediumData?.mediumLand.wf4Pm!)}
+                height={70}
+                width={70}
+                isClickToPauseDisabled={true}
+              />
+            )}
           </div>
-          <div className="ml-1">{`${mediumData?.mediumLand.rnSt4Pm}%`}</div>
+          <div className="text-base">{`${mediumTempData?.mediumTemp.taMax4}° / ${mediumTempData?.mediumTemp.taMin4}°`}</div>
+          <div className="flex justify-center items-center">
+            <div>
+              <Umbrella size={30} color="#938FF2" />
+            </div>
+            <div className="ml-1">{`${mediumData?.mediumLand.rnSt4Pm}%`}</div>
+          </div>
         </div>
-      </div>
-      <div
-        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
-      >
-        <div className="text-2xl text-white">{`${today
-          .add(5, "day")
-          .locale("ko")
-          .format("dd")}`}</div>
-        <div className="text-white">{`${today
-          .add(5, "day")
-          .locale("ko")
-          .format("MM/DD")}`}</div>
-        <div>
-          {mediumDataLoading ? (
-            <Lottie
-              options={etcLoadingOptions}
-              height={30}
-              width={30}
-              isClickToPauseDisabled={true}
-            />
-          ) : (
-            <Lottie
-              options={makeMediumLottieOptions(mediumData?.mediumLand.wf5Pm!)}
-              height={50}
-              width={50}
-              isClickToPauseDisabled={true}
-            />
-          )}
-        </div>
-        <div className="text-sm">{`${mediumTempData?.mediumTemp.taMax5}° / ${mediumTempData?.mediumTemp.taMin5}°`}</div>
-        <div className="flex justify-center items-center">
+        <div
+          className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+        >
+          <div className="text-3xl text-white">{`${today
+            .add(5, "day")
+            .locale("ko")
+            .format("dd")}`}</div>
+          <div className="text-white">{`${today
+            .add(5, "day")
+            .locale("ko")
+            .format("MM/DD")}`}</div>
           <div>
-            <Umbrella size={20} color="#938FF2" />
+            {mediumDataLoading ? (
+              <Lottie
+                options={etcLoadingOptions}
+                height={30}
+                width={30}
+                isClickToPauseDisabled={true}
+              />
+            ) : (
+              <Lottie
+                options={makeMediumLottieOptions(mediumData?.mediumLand.wf5Pm!)}
+                height={70}
+                width={70}
+                isClickToPauseDisabled={true}
+              />
+            )}
           </div>
-          <div className="ml-1">{`${mediumData?.mediumLand.rnSt5Pm}%`}</div>
+          <div className="text-base">{`${mediumTempData?.mediumTemp.taMax5}° / ${mediumTempData?.mediumTemp.taMin5}°`}</div>
+          <div className="flex justify-center items-center">
+            <div>
+              <Umbrella size={30} color="#938FF2" />
+            </div>
+            <div className="ml-1">{`${mediumData?.mediumLand.rnSt5Pm}%`}</div>
+          </div>
         </div>
-      </div>
-      <div
-        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
-      >
-        <div className="text-2xl text-white">{`${today
-          .add(6, "day")
-          .locale("ko")
-          .format("dd")}`}</div>
-        <div className="text-white">{`${today
-          .add(6, "day")
-          .locale("ko")
-          .format("MM/DD")}`}</div>
-        <div>
-          {mediumDataLoading ? (
-            <Lottie
-              options={etcLoadingOptions}
-              height={30}
-              width={30}
-              isClickToPauseDisabled={true}
-            />
-          ) : (
-            <Lottie
-              options={makeMediumLottieOptions(mediumData?.mediumLand.wf6Pm!)}
-              height={50}
-              width={50}
-              isClickToPauseDisabled={true}
-            />
-          )}
-        </div>
-        <div className="text-sm">{`${mediumTempData?.mediumTemp.taMax6}° / ${mediumTempData?.mediumTemp.taMin6}°`}</div>
-        <div className="flex justify-center items-center">
+        <div
+          className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+        >
+          <div className="text-3xl text-white">{`${today
+            .add(6, "day")
+            .locale("ko")
+            .format("dd")}`}</div>
+          <div className="text-white">{`${today
+            .add(6, "day")
+            .locale("ko")
+            .format("MM/DD")}`}</div>
           <div>
-            <Umbrella size={20} color="#938FF2" />
+            {mediumDataLoading ? (
+              <Lottie
+                options={etcLoadingOptions}
+                height={30}
+                width={30}
+                isClickToPauseDisabled={true}
+              />
+            ) : (
+              <Lottie
+                options={makeMediumLottieOptions(mediumData?.mediumLand.wf6Pm!)}
+                height={70}
+                width={70}
+                isClickToPauseDisabled={true}
+              />
+            )}
           </div>
-          <div className="ml-1">{`${mediumData?.mediumLand.rnSt6Pm}%`}</div>
+          <div className="text-base">{`${mediumTempData?.mediumTemp.taMax6}° / ${mediumTempData?.mediumTemp.taMin6}°`}</div>
+          <div className="flex justify-center items-center">
+            <div>
+              <Umbrella size={30} color="#938FF2" />
+            </div>
+            <div className="ml-1">{`${mediumData?.mediumLand.rnSt6Pm}%`}</div>
+          </div>
         </div>
-      </div>
-      <div
-        className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
-      >
-        <div className="text-2xl text-white">{`${today
-          .add(7, "day")
-          .locale("ko")
-          .format("dd")}`}</div>
-        <div className="text-white">{`${today
-          .add(7, "day")
-          .locale("ko")
-          .format("MM/DD")}`}</div>
-        <div>
-          {mediumDataLoading ? (
-            <Lottie
-              options={etcLoadingOptions}
-              height={30}
-              width={30}
-              isClickToPauseDisabled={true}
-            />
-          ) : (
-            <Lottie
-              options={makeMediumLottieOptions(mediumData?.mediumLand.wf7Pm!)}
-              height={50}
-              width={50}
-              isClickToPauseDisabled={true}
-            />
-          )}
-        </div>
-        <div className="text-sm">{`${mediumTempData?.mediumTemp.taMax7}° / ${mediumTempData?.mediumTemp.taMin7}°`}</div>
-        <div className="flex justify-center items-center">
+        <div
+          className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+        >
+          <div className="text-3xl text-white">{`${today
+            .add(7, "day")
+            .locale("ko")
+            .format("dd")}`}</div>
+          <div className="text-white">{`${today
+            .add(7, "day")
+            .locale("ko")
+            .format("MM/DD")}`}</div>
           <div>
-            <Umbrella size={20} color="#938FF2" />
+            {mediumDataLoading ? (
+              <Lottie
+                options={etcLoadingOptions}
+                height={30}
+                width={30}
+                isClickToPauseDisabled={true}
+              />
+            ) : (
+              <Lottie
+                options={makeMediumLottieOptions(mediumData?.mediumLand.wf7Pm!)}
+                height={70}
+                width={70}
+                isClickToPauseDisabled={true}
+              />
+            )}
           </div>
-          <div className="ml-1">{`${mediumData?.mediumLand.rnSt7Pm}%`}</div>
+          <div className="text-base">{`${mediumTempData?.mediumTemp.taMax7}° / ${mediumTempData?.mediumTemp.taMin7}°`}</div>
+          <div className="flex justify-center items-center">
+            <div>
+              <Umbrella size={30} color="#938FF2" />
+            </div>
+            <div className="ml-1">{`${mediumData?.mediumLand.rnSt7Pm}%`}</div>
+          </div>
         </div>
       </div>
     </div>
