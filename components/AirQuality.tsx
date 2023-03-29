@@ -20,6 +20,7 @@ import {
 import todayData from "@/modules/dayjs";
 import { useEffect } from "react";
 import checkGrade from "@/modules/check";
+import dayjs from "dayjs";
 
 export default function AirQuality() {
   const {
@@ -42,22 +43,13 @@ export default function AirQuality() {
   const pop = weatherGuessData?.allWeatherGuess.find(function (item) {
     if (
       item.category === "POP" &&
-      item.fcstDate === todayData.day &&
-      item.fcstTime === todayData.hour
+      item.fcstDate === dayjs().format("YYYYMMDD") &&
+      item.fcstTime === `${dayjs().format("HH")}00`
     ) {
       return item;
     }
   });
-  const tmn = weatherGuessData?.allWeatherGuess.find(function (item) {
-    if (item.category === "TMN") {
-      return item.fcstValue;
-    }
-  });
-  const tmx = weatherGuessData?.allWeatherGuess.find(function (item) {
-    if (item.category === "TMX") {
-      return item.fcstValue;
-    }
-  });
+  console.log("AirQuality POP(비올확률):", pop);
 
   const {
     data: weatherData,
@@ -69,13 +61,9 @@ export default function AirQuality() {
       return item;
     }
   });
+  console.log(reh);
   const wsd = weatherData?.allWeather.find(function (item) {
     if (item.category === "WSD") {
-      return item;
-    }
-  });
-  const rn1 = weatherData?.allWeather.find(function (item) {
-    if (item.category === "RN1") {
       return item;
     }
   });

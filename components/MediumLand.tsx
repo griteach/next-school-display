@@ -18,6 +18,7 @@ import { Umbrella } from "phosphor-react";
 import { useQuery } from "@apollo/client";
 import Lottie from "react-lottie";
 import { after } from "node:test";
+import { useEffect } from "react";
 
 export default function MediumLand() {
   const CLEAR_SKY_BG_COLOR =
@@ -57,24 +58,65 @@ export default function MediumLand() {
     loading: weatherGuessLoading,
     refetch: weatherGuessRefetch,
   } = useQuery<IWeatherGuessGql>(GET_WEATHER_GUESS);
+
+  //하늘상태
   const sky = weatherGuessData?.allWeatherGuess.filter(function (item) {
     return item.category === "SKY";
   });
 
-  console.log(sky);
-  const tomorrowWeather = sky?.filter(function (item) {
-    return (
-      item.fcstDate === today.add(1, "day").format("YYYYMMDD") &&
-      item.fcstTime === "1100"
-    );
+  //강수확률
+  const pop = weatherGuessData?.allWeatherGuess.filter(function (item) {
+    return item.category === "POP";
   });
 
-  const afterTomorrowWeather = sky?.filter(function (item) {
-    return (
-      item.fcstDate === today.add(2, "day").format("YYYYMMDD") &&
-      item.fcstTime === "1100"
-    );
+  //내일 최저기온
+  const tomorrowTmn = weatherGuessData?.allWeatherGuess.filter(function (item) {
+    return item.category === "TMN" && item.fcstDate === tomorrow;
   });
+
+  //내일 최고기온
+  const tomorrowTmx = weatherGuessData?.allWeatherGuess.filter(function (item) {
+    return item.category === "TMX" && item.fcstDate === tomorrow;
+  });
+  console.log(tomorrowTmx![0].fcstValue);
+  //모레 최저기온
+  const afterTomorrowTmn = weatherGuessData?.allWeatherGuess.filter(function (
+    item
+  ) {
+    return item.category === "TMN" && item.fcstDate === afterTomorrow;
+  });
+
+  //모레 최고기온
+  const afterTomorrowTmx = weatherGuessData?.allWeatherGuess.filter(function (
+    item
+  ) {
+    return item.category === "TMX" && item.fcstDate === afterTomorrow;
+  });
+
+  console.log("TMX", tomorrowTmx);
+  //내일 하늘 상태
+  const tomorrowWeatherSky = sky?.find(function (item) {
+    return item.fcstDate === tomorrow && item.fcstTime === "1100";
+  });
+
+  //내일 강수확률
+  const tomorrowWeatherPop = pop?.find(function (item) {
+    return item.fcstDate === tomorrow && item.fcstTime === "1100";
+  });
+
+  //모레 하늘 상태
+  const afterTomorrowWeatherSky = sky?.find(function (item) {
+    return item.fcstDate === afterTomorrow && item.fcstTime === "1100";
+  });
+
+  //모레 강수확률
+  const afterTomorrowWeatherPop = pop?.find(function (item) {
+    return item.fcstDate === afterTomorrow && item.fcstTime === "1100";
+  });
+
+  console.log(
+    `내일 하늘상태: ${tomorrowWeatherSky?.fcstValue}, 내일 강수확률: ${tomorrowWeatherPop?.fcstValue}, 모레 하늘상태: ${afterTomorrowWeatherSky?.fcstValue}, 모레 강수확률: ${afterTomorrowWeatherPop?.fcstValue}`
+  );
 
   const makeMediumLottieOptions = (value: string) => {
     switch (value) {
@@ -85,14 +127,6 @@ export default function MediumLand() {
       case "3":
         return mediumWindyOptions;
 
-      default:
-        return mediumWindyOptions;
-    }
-  };
-  const makeMedium_2_3_LottieOptions = (value: string) => {
-    switch (value) {
-      case "없음":
-        return mediumSunnyOptions;
       default:
         return mediumWindyOptions;
     }
@@ -111,6 +145,7 @@ export default function MediumLand() {
     loading: mediumTempDataLoading,
     refetch: mediumTempDataRefetch,
   } = useQuery<IMediumTempGql>(GET_MEDIUM_TEMP);
+
   return (
     <div className="w-full h-full">
       <div className="w-full h-full  grid grid-cols-7 grid-rows-1 gap-1">
@@ -132,23 +167,61 @@ export default function MediumLand() {
               />
             ) : (
               <Lottie
-                options={makeMediumLottieOptions(mediumData?.mediumLand.wf3Pm!)}
+                options={makeMediumLottieOptions(
+                  tomorrowWeatherSky?.fcstValue!
+                )}
                 height={70}
                 width={70}
                 isClickToPauseDisabled={true}
               />
             )}
           </div>
-          <div className="text-base">{`${mediumTempData?.mediumTemp.taMax3}° / ${mediumTempData?.mediumTemp.taMin3}°`}</div>
+          <div className="text-base">{`${tomorrowTmx![0].fcstValue} / ${
+            tomorrowTmn![0].fcstValue
+          }`}</div>
           <div className="flex justify-center items-center">
             <div>
               <Umbrella size={30} color="#938FF2" />
             </div>
-            <div className="ml-1">{`${mediumData?.mediumLand.rnSt3Pm}%`}</div>
+            <div className="ml-1">{`${tomorrowWeatherPop?.fcstValue}%`}</div>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center">
-          <div>모레</div>
+        <div
+          className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
+        >
+          <div className="text-3xl text-white">모레</div>
+          <div className="text-white">{`${today
+            .add(2, "day")
+            .locale("ko")
+            .format("MM/DD")}`}</div>
+          <div>
+            {weatherGuessLoading ? (
+              <Lottie
+                options={etcLoadingOptions}
+                height={30}
+                width={30}
+                isClickToPauseDisabled={true}
+              />
+            ) : (
+              <Lottie
+                options={makeMediumLottieOptions(
+                  afterTomorrowWeatherSky?.fcstValue!
+                )}
+                height={70}
+                width={70}
+                isClickToPauseDisabled={true}
+              />
+            )}
+          </div>
+          <div className="text-base">{`${afterTomorrowTmx![0].fcstValue} / ${
+            afterTomorrowTmn![0].fcstValue
+          }`}</div>
+          <div className="flex justify-center items-center">
+            <div>
+              <Umbrella size={30} color="#938FF2" />
+            </div>
+            <div className="ml-1">{`${afterTomorrowWeatherPop?.fcstValue}%`}</div>
+          </div>
         </div>
         <div
           className={`flex flex-col justify-center items-center rounded-full ${CLEAR_SKY_BG_COLOR}`}
