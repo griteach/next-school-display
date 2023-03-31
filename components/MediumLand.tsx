@@ -78,7 +78,7 @@ export default function MediumLand() {
   const tomorrowTmx = weatherGuessData?.allWeatherGuess.filter(function (item) {
     return item.category === "TMX" && item.fcstDate === tomorrow;
   });
-  console.log(tomorrowTmx![0].fcstValue);
+
   //모레 최저기온
   const afterTomorrowTmn = weatherGuessData?.allWeatherGuess.filter(function (
     item
@@ -93,7 +93,16 @@ export default function MediumLand() {
     return item.category === "TMX" && item.fcstDate === afterTomorrow;
   });
 
-  console.log("TMX", tomorrowTmx);
+  console.log(
+    "TMX",
+    tomorrowTmx?.find(function (item) {
+      return item;
+    })?.fcstValue
+  );
+  console.log("TMn", tomorrowTmn);
+  console.log("afterTMX", afterTomorrowTmx);
+  console.log("afterTMn", afterTomorrowTmn);
+  console.log(typeof afterTomorrowTmn);
   //내일 하늘 상태
   const tomorrowWeatherSky = sky?.find(function (item) {
     return item.fcstDate === tomorrow && item.fcstTime === "1100";
@@ -176,8 +185,18 @@ export default function MediumLand() {
               />
             )}
           </div>
-          <div className="text-base">{`${tomorrowTmx![0].fcstValue} / ${
-            tomorrowTmn![0].fcstValue
+          <div className="text-base">{`${
+            weatherGuessLoading
+              ? "Loading..."
+              : tomorrowTmx?.find(function (item) {
+                  return item;
+                })?.fcstValue
+          } / ${
+            weatherGuessLoading
+              ? "Loading..."
+              : tomorrowTmn?.find(function (item) {
+                  return item;
+                })?.fcstValue
           }`}</div>
           <div className="flex justify-center items-center">
             <div>
@@ -213,8 +232,18 @@ export default function MediumLand() {
               />
             )}
           </div>
-          <div className="text-base">{`${afterTomorrowTmx![0].fcstValue} / ${
-            afterTomorrowTmn![0].fcstValue
+          <div className="text-base">{`${
+            weatherGuessLoading
+              ? "Loading..."
+              : afterTomorrowTmx?.find(function (item) {
+                  return item;
+                })?.fcstValue
+          } / ${
+            weatherGuessLoading
+              ? "Loading..."
+              : tomorrowTmn?.find(function (item) {
+                  return item;
+                })?.fcstValue
           }`}</div>
           <div className="flex justify-center items-center">
             <div>

@@ -5,7 +5,7 @@ import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 //따로 엔드포인트(서버)를 하나 가지고 있는게 아니기 때문에!
 //나중에 DB랑 연동할거면 프리즈마? 라는 걸로 연결하면 될듯
 
-interface Weather {
+export interface Weather {
   id: string;
   baseDate: string;
   baseTime: string;
@@ -15,7 +15,7 @@ interface Weather {
   obsrValue: string;
 }
 
-interface WeatherGuess {
+export interface WeatherGuess {
   baseDate: string;
   baseTime: string;
   category: string;
@@ -26,7 +26,7 @@ interface WeatherGuess {
   ny: number;
 }
 
-interface MediumLand {
+export interface MediumLand {
   regId: String;
 
   //강수 예보
@@ -59,7 +59,7 @@ interface MediumLand {
   wf10: string;
 }
 
-interface MediumTemp {
+export interface MediumTemp {
   regId: string;
   taMin3: number;
   taMin3Low: number;
@@ -316,10 +316,10 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   //Real Server
-  uri: "http://iteach12.iptime.org:51212/",
+  // uri: "http://iteach12.iptime.org:51212/",
 
   //Dev Server
-  // uri: "http://localhost:5001/",
+  uri: "http://localhost:5001/",
   cache,
 });
 

@@ -5,6 +5,7 @@ import {
   IDustGql,
   IWeatherGql,
   IWeatherGuessGql,
+  Weather,
 } from "@/modules/apollo";
 
 import {
@@ -53,13 +54,27 @@ export default function Forecast() {
 
   const [dustState, setDustState] = useState<IDust | null>(null);
 
+  const [weatherState, setWeatherState] = useState({});
   //useQuery로 날씨 데이터 가져옴.
   //RN1(1시간강수량), T1H(기온), UUU(동서바람성분), VVV(남북바람성분), WSD(풍속)
   const {
     data: weatherData,
     loading: weatherDataLoading,
     refetch: weatherDataRefetch,
-  } = useQuery<IWeatherGql>(GET_WEATHER);
+  } = useQuery<IWeatherGql>(GET_WEATHER, {
+    onCompleted: (weatherData) => {
+      setWeatherState((prevState) => {
+        return {
+          ...prevState,
+          t1h: weatherData.allWeather.find(function (item) {
+            if (item.category === "T1H") {
+              return item.obsrValue;
+            }
+          }),
+        };
+      });
+    },
+  });
   //가지고는 왔는데 무슨 타입인지 체크가 필요함..
 
   //현재기온
@@ -222,6 +237,7 @@ export default function Forecast() {
             </div>
 
             <span className="text-7xl ">{t1h?.obsrValue}</span>
+
             <span className="text-5xl">°</span>
           </div>
           <div className="text-white text-2xl flex justify-center items-center  ">{`${
