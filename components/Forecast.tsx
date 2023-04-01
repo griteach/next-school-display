@@ -76,6 +76,7 @@ export default function Forecast() {
     },
   });
   //가지고는 왔는데 무슨 타입인지 체크가 필요함..
+  //여기 고쳐보자고...
 
   //현재기온
   const t1h = weatherData?.allWeather.find(function (item) {
