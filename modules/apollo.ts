@@ -5,6 +5,10 @@ import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 //따로 엔드포인트(서버)를 하나 가지고 있는게 아니기 때문에!
 //나중에 DB랑 연동할거면 프리즈마? 라는 걸로 연결하면 될듯
 
+export interface IMeal {
+  date: string;
+  menu: [string];
+}
 export interface Weather {
   id: string;
   baseDate: string;
@@ -122,7 +126,7 @@ export interface IMediumTempGql {
   mediumTemp: MediumTemp;
 }
 
-export interface IWeatherGuessGql {
+export interface IWeatherGuess {
   allWeatherGuess: WeatherGuess[];
 }
 
@@ -150,6 +154,16 @@ export interface IDustGql {
     sidoName: string;
   };
 }
+
+//neis 급식
+export const GET_MEAL = gql`
+  query Query($schoolCode: String!, $officeCode: String!) {
+    lunch(schoolCode: $schoolCode, officeCode: $officeCode) {
+      menu
+      date
+    }
+  }
+`;
 
 //지역으로 미세먼지 검색하기.
 export const GET_DUST = gql`

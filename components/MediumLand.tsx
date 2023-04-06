@@ -4,7 +4,9 @@ import {
   GET_WEATHER_GUESS,
   IMediumLandGql,
   IMediumTempGql,
-  IWeatherGuessGql,
+  IWeatherGuess as IWeatherGuess,
+  GET_MEAL,
+  IMeal,
 } from "@/modules/apollo";
 import {
   etcLoadingOptions,
@@ -18,11 +20,14 @@ import { Umbrella } from "phosphor-react";
 import { useQuery } from "@apollo/client";
 import Lottie from "react-lottie";
 import { after } from "node:test";
-import { useEffect } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 export default function MediumLand() {
   const CLEAR_SKY_BG_COLOR =
     "bg-gradient-to-b from-weather-clear-t to-wather-clear-b";
+  const RAIN_SKY_BG_COLOR =
+    "bg-gradient-to-b from-weather-rain-t to-wather-rain-b";
+  const [weatherBgColor, setWeatherBgColor] = useState(RAIN_SKY_BG_COLOR);
   const dayjs = require("dayjs"); // dayjs 라이브러리를 사용하기 위해 require 합니다.
   const localizedFormat = require("dayjs/plugin/localizedFormat"); // 한국어 형식을 사용하기 위해 localizedFormat 플러그인을 불러옵니다.
   dayjs.extend(localizedFormat); // 플러그인을 사용합니다.
@@ -57,7 +62,7 @@ export default function MediumLand() {
     data: weatherGuessData,
     loading: weatherGuessLoading,
     refetch: weatherGuessRefetch,
-  } = useQuery<IWeatherGuessGql>(GET_WEATHER_GUESS);
+  } = useQuery<IWeatherGuess>(GET_WEATHER_GUESS);
 
   //하늘상태
   const sky = weatherGuessData?.allWeatherGuess.filter(function (item) {
@@ -93,6 +98,8 @@ export default function MediumLand() {
     return item.category === "TMX" && item.fcstDate === afterTomorrow;
   });
 
+  const makeWeatherObj = () => {};
+
   console.log(
     "TMX",
     tomorrowTmx?.find(function (item) {
@@ -103,10 +110,35 @@ export default function MediumLand() {
   console.log("afterTMX", afterTomorrowTmx);
   console.log("afterTMn", afterTomorrowTmn);
   console.log(typeof afterTomorrowTmn);
+  const getWeatherSky = (
+    weatherGuess: IWeatherGuess,
+    category: String,
+    date: String,
+    time: String
+  ) => {
+    weatherGuess?.allWeatherGuess
+      .filter(function (item) {
+        return item.category === category;
+      })
+      .find(function (item) {
+        return item.fcstDate === date && item.fcstTime === time;
+      });
+  };
+
   //내일 하늘 상태
-  const tomorrowWeatherSky = sky?.find(function (item) {
-    return item.fcstDate === tomorrow && item.fcstTime === "1100";
-  });
+  const testTomorrowWeatherSky = getWeatherSky(
+    weatherGuessData!,
+    "SKY",
+    tomorrow,
+    "1100"
+  );
+  const tomorrowWeatherSky = weatherGuessData?.allWeatherGuess
+    .filter(function (item) {
+      return item.category === "SKY";
+    })
+    .find(function (item) {
+      return item.fcstDate === tomorrow && item.fcstTime === "1100";
+    });
 
   //내일 강수확률
   const tomorrowWeatherPop = pop?.find(function (item) {
@@ -154,7 +186,17 @@ export default function MediumLand() {
     loading: mediumTempDataLoading,
     refetch: mediumTempDataRefetch,
   } = useQuery<IMediumTempGql>(GET_MEDIUM_TEMP);
+  useEffect(() => {
+    const intercalId = setInterval(() => {
+      mediumDataRefetch();
+      mediumTempDataRefetch();
+      weatherGuessRefetch();
+    }, 1000 * 60 * 30);
 
+    return () => {
+      clearInterval(intercalId);
+    };
+  }, [mediumDataRefetch, mediumTempDataRefetch, weatherGuessRefetch]);
   return (
     <div className="w-full h-full">
       <div className="w-full h-full  grid grid-cols-7 grid-rows-1 gap-1">
@@ -185,19 +227,23 @@ export default function MediumLand() {
               />
             )}
           </div>
-          <div className="text-base">{`${
+          <div className="text-base  ">{`${
             weatherGuessLoading
               ? "Loading..."
-              : tomorrowTmx?.find(function (item) {
-                  return item;
-                })?.fcstValue
-          } / ${
+              : parseInt(
+                  tomorrowTmx?.find(function (item) {
+                    return item;
+                  })?.fcstValue!
+                )
+          }° / ${
             weatherGuessLoading
               ? "Loading..."
-              : tomorrowTmn?.find(function (item) {
-                  return item;
-                })?.fcstValue
-          }`}</div>
+              : parseInt(
+                  tomorrowTmn?.find(function (item) {
+                    return item;
+                  })?.fcstValue!
+                )
+          }°`}</div>
           <div className="flex justify-center items-center">
             <div>
               <Umbrella size={30} color="#938FF2" />
@@ -232,19 +278,19 @@ export default function MediumLand() {
               />
             )}
           </div>
-          <div className="text-base">{`${
+          <div className="text-base">{`${parseInt(
             weatherGuessLoading
               ? "Loading..."
               : afterTomorrowTmx?.find(function (item) {
                   return item;
-                })?.fcstValue
-          } / ${
+                })?.fcstValue!
+          )}° / ${parseInt(
             weatherGuessLoading
               ? "Loading..."
               : tomorrowTmn?.find(function (item) {
                   return item;
-                })?.fcstValue
-          }`}</div>
+                })?.fcstValue!
+          )}°`}</div>
           <div className="flex justify-center items-center">
             <div>
               <Umbrella size={30} color="#938FF2" />
