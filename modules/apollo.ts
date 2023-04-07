@@ -5,10 +5,6 @@ import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 //따로 엔드포인트(서버)를 하나 가지고 있는게 아니기 때문에!
 //나중에 DB랑 연동할거면 프리즈마? 라는 걸로 연결하면 될듯
 
-export interface IMeal {
-  date: string;
-  menu: [string];
-}
 export interface Weather {
   id: string;
   baseDate: string;
@@ -115,6 +111,13 @@ export interface MediumTemp {
   taMax10High: number;
 }
 
+export interface IMeal {
+  date: string;
+  menu: [string];
+}
+export interface IMealGql {
+  lunch: IMeal;
+}
 export interface IWeatherGql {
   allWeather: Weather[];
 }
