@@ -1,6 +1,6 @@
 import { GET_MEAL, IMeal, IMealGql } from "@/modules/apollo";
 import { useQuery } from "@apollo/client";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
 export default function Meal() {
   const [todayLunch, setTodayLunch] = useState<IMeal | null>(null);
@@ -20,13 +20,25 @@ export default function Meal() {
       },
     },
   });
+  const myLunch = mealData?.lunch;
+  console.log(myLunch?.menu);
+  useEffect(() => {
+    setTodayLunch(myLunch!);
+    const intercalId = setInterval(() => {
+      mealRefetch();
+    }, 1000 * 60 * 60 * 3);
 
+    return () => {
+      clearInterval(intercalId);
+    };
+  }, [mealRefetch, myLunch]);
   return (
     <div>
       <div>급식 정보입니다.</div>
       <div>d</div>
-      <div>{mealData?.lunch.date}</div>
-      <div>{mealData?.lunch.menu}</div>
+
+      <div>{todayLunch?.date}</div>
+      <div>{todayLunch?.menu}</div>
     </div>
   );
 }
