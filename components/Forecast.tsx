@@ -154,6 +154,8 @@ export default function Forecast() {
   const checkCurrentGrade = () => {
     setCurrentPm10Grade(dustData?.dust.pm10Grade!);
     setCurrentPm25Grade(dustData?.dust.pm25Grade!);
+    console.log("Current pm10 : ", currentPm10Grade);
+    console.log("Current pm25 : ", currentPm25Grade);
     console.log("Current pm 10 & 25 grade setting complete!");
   };
 

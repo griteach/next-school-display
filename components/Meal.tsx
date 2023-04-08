@@ -35,7 +35,6 @@ export default function Meal() {
   return (
     <div>
       <div>급식 정보입니다.</div>
-      <div>d</div>
 
       <div>{todayLunch?.date}</div>
       <div>{todayLunch?.menu}</div>

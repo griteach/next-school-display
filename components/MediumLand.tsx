@@ -14,6 +14,7 @@ import {
   mediumWindyOptions,
   mediumRainOptions,
   mediumSnowOptions,
+  mediumCloudyOptions,
 } from "@/modules/lottieOptions";
 
 import { Umbrella } from "phosphor-react";
@@ -168,6 +169,25 @@ export default function MediumLand() {
       case "3":
         return mediumWindyOptions;
 
+      case "구름많고비":
+      case "구름많고 비":
+      case "구름많고 소나기":
+      case "구름많고소나기":
+        return mediumRainOptions;
+      case "흐림":
+        return mediumCloudyOptions;
+      case "흐리고 비":
+      case "흐리고비":
+      case "흐리고 소나기":
+      case "흐리고소나기":
+        return mediumRainOptions;
+      case "흐리고눈":
+      case "흐리고 눈":
+      case "흐리고 비/눈":
+      case "흐리고비/눈":
+      case "구름많고 비/눈":
+      case "구름많고비/눈":
+        return mediumSnowOptions;
       default:
         return mediumWindyOptions;
     }
