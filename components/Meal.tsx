@@ -1,6 +1,8 @@
 import { GET_MEAL, IMeal, IMealGql } from "@/modules/apollo";
 import { useQuery } from "@apollo/client";
+import { ForkKnife } from "phosphor-react";
 import { SetStateAction, useEffect, useState } from "react";
+import LunchMenu from "./LunchMenu";
 
 export default function Meal() {
   const [todayLunch, setTodayLunch] = useState<IMeal | null>(null);
@@ -21,7 +23,7 @@ export default function Meal() {
     },
   });
   const myLunch = mealData?.lunch;
-  console.log(myLunch?.menu);
+  console.log(typeof myLunch?.menu);
   useEffect(() => {
     setTodayLunch(myLunch!);
     const intercalId = setInterval(() => {
@@ -32,12 +34,28 @@ export default function Meal() {
       clearInterval(intercalId);
     };
   }, [mealRefetch, myLunch]);
+  const hrStyle = {
+    color: "red",
+    backgroundColor: "red",
+    height: 1,
+    borderWidth: 0,
+  };
   return (
     <div>
-      <div>급식 정보입니다.</div>
+      <div className="flex justify-start items-center">
+        <ForkKnife size={40} color="#938FF2" />
+        <div className="text-3xl ml-2">오늘의 급식</div>
+      </div>
 
-      <div>{todayLunch?.date}</div>
-      <div>{todayLunch?.menu}</div>
+      <div>
+        <ul>
+          {todayLunch?.menu.map((item) => (
+            <li key={item}>
+              <LunchMenu menu={item} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
