@@ -4,7 +4,7 @@ import {
   GET_WEATHER_GUESS,
   IDustGql,
   IWeatherGql,
-  IWeatherGuessGql,
+  IWeatherGuess,
 } from "@/modules/apollo";
 import { useQuery } from "@apollo/client";
 import {
@@ -37,36 +37,36 @@ export default function AirQuality() {
     data: weatherGuessData,
     loading: weatherGuessLoading,
     refetch: weatherGuessRefetch,
-  } = useQuery<IWeatherGuessGql>(GET_WEATHER_GUESS);
+  } = useQuery<IWeatherGuess>(GET_WEATHER_GUESS);
 
   //강수확률
-  const pop = weatherGuessData?.allWeatherGuess.find(function (item) {
-    if (
-      item.category === "POP" &&
-      item.fcstDate === dayjs().format("YYYYMMDD") &&
-      item.fcstTime === `${dayjs().format("HH")}00`
-    ) {
-      return item;
-    }
-  });
-  console.log("AirQuality POP(비올확률):", pop);
+  // const pop = weatherGuessData?.allWeatherGuess.find(function (item) {
+  //   if (
+  //     item.category === "POP" &&
+  //     item.fcstDate === dayjs().format("YYYYMMDD") &&
+  //     item.fcstTime === `${dayjs().format("HH")}00`
+  //   ) {
+  //     return item;
+  //   }
+  // });
 
   const {
     data: weatherData,
     loading: weatherDataLoading,
     refetch: weatherDataRefetch,
   } = useQuery<IWeatherGql>(GET_WEATHER);
-  const reh = weatherData?.allWeather.find(function (item) {
-    if (item.category === "REH") {
-      return item;
-    }
-  });
-  console.log(reh);
-  const wsd = weatherData?.allWeather.find(function (item) {
-    if (item.category === "WSD") {
-      return item;
-    }
-  });
+  // const reh = weatherData?.allWeather.find(function (item) {
+  //   if (item.category === "REH") {
+  //     return item;
+  //   }
+  // });
+
+  // const wsd = weatherData?.allWeather.find(function (item) {
+  //   if (item.category === "WSD") {
+  //     return item;
+
+  //   }
+  // });
 
   useEffect(() => {
     const intercalId = setInterval(() => {
@@ -114,7 +114,16 @@ export default function AirQuality() {
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
                 <div>바람세기</div>
-                <div>{wsd?.obsrValue}m/s</div>
+                <div>
+                  {
+                    weatherData?.allWeather.find(function (item) {
+                      if (item.category === "WSD") {
+                        return item;
+                      }
+                    })!.obsrValue
+                  }
+                  m/s
+                </div>
               </div>
             </div>
             <div className="w-1/3 h-full  flex justify-center items-center text-lg">
@@ -134,7 +143,17 @@ export default function AirQuality() {
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start text-lg ml-1">
                 <div>비올확률</div>
-                <div>{`${pop?.fcstValue}%`}</div>
+                <div>{`${
+                  weatherGuessData?.allWeatherGuess.find(function (item) {
+                    if (
+                      item.category === "POP" &&
+                      item.fcstDate === dayjs().format("YYYYMMDD") &&
+                      item.fcstTime === `${dayjs().format("HH")}00`
+                    ) {
+                      return item;
+                    }
+                  })!.fcstValue
+                }%`}</div>
               </div>
             </div>
             <div className="w-1/3 h-full  flex justify-center items-center text-lg">
@@ -143,7 +162,16 @@ export default function AirQuality() {
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start ml-1">
                 <div>습도</div>
-                <div>{reh?.obsrValue}%</div>
+                <div>
+                  {
+                    weatherData?.allWeather.find(function (item) {
+                      if (item.category === "REH") {
+                        return item;
+                      }
+                    })!.obsrValue
+                  }
+                  %
+                </div>
               </div>
             </div>
             <div className="w-1/3 h-full  flex justify-center items-center text-lg">

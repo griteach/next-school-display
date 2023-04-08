@@ -9,6 +9,7 @@ import LottieMediumSunny from "../pages/lottie/weather/weather-day-clear-sky.jso
 import LottieMediumWindy from "../pages/lottie/weather/weather-day-scattered-clouds.json";
 import LottieMediumRain from "../pages/lottie/weather/weather-day-rain.json";
 import LottieMediumSnow from "../pages/lottie/weather/weather-day-snow.json";
+import LottieMediumCloudy from "../pages/lottie/weather/weather-day-mist.json";
 
 //로딩 로띠에 파일 임포트
 import LottieEtcLoading from "../pages/lottie/etc/loading.json";
@@ -53,6 +54,15 @@ export const mediumSnowOptions = {
   loop: true,
   autoplay: true,
   animationData: LottieMediumSnow,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+//cloudy
+export const mediumCloudyOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: LottieMediumCloudy,
   rendererSettings: {
     preserveAspectRatio: "xMidYMid slice",
   },

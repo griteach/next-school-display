@@ -4,7 +4,7 @@ import {
   GET_WEATHER_GUESS,
   IDustGql,
   IWeatherGql,
-  IWeatherGuessGql,
+  IWeatherGuess,
   Weather,
 } from "@/modules/apollo";
 
@@ -88,7 +88,7 @@ export default function Forecast() {
     data: weatherGuessData,
     loading: weatherGuessLoading,
     refetch: weatherGuessRefetch,
-  } = useQuery<IWeatherGuessGql>(GET_WEATHER_GUESS);
+  } = useQuery<IWeatherGuess>(GET_WEATHER_GUESS);
 
   const tmn = weatherGuessData?.allWeatherGuess.find(function (item) {
     if (item.category === "TMN") {
@@ -154,6 +154,8 @@ export default function Forecast() {
   const checkCurrentGrade = () => {
     setCurrentPm10Grade(dustData?.dust.pm10Grade!);
     setCurrentPm25Grade(dustData?.dust.pm25Grade!);
+    console.log("Current pm10 : ", currentPm10Grade);
+    console.log("Current pm25 : ", currentPm25Grade);
     console.log("Current pm 10 & 25 grade setting complete!");
   };
 
@@ -183,6 +185,8 @@ export default function Forecast() {
     const intercalId = setInterval(() => {
       dustRefetch();
       console.log("REFETCH!!!");
+      weatherGuessRefetch();
+      weatherDataRefetch();
       checkMsg();
       checkCurrentGrade();
       changeBackgroudColor(currentPm10Grade, currentPm25Grade);
@@ -198,6 +202,8 @@ export default function Forecast() {
     checkCurrentGrade,
     currentPm10Grade,
     currentPm25Grade,
+    weatherGuessRefetch,
+    weatherDataRefetch,
   ]);
 
   return (
