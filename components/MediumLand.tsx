@@ -29,6 +29,23 @@ export default function MediumLand() {
   const RAIN_SKY_BG_COLOR =
     "bg-gradient-to-b from-weather-rain-t to-wather-rain-b";
   const [weatherBgColor, setWeatherBgColor] = useState(RAIN_SKY_BG_COLOR);
+  const checkBgColor = (lottieOptions: {}) => {
+    switch (lottieOptions) {
+      case mediumSunnyOptions:
+      case mediumWindyOptions:
+        setWeatherBgColor(CLEAR_SKY_BG_COLOR);
+        break;
+      case mediumRainOptions:
+      case mediumCloudyOptions:
+      case mediumSnowOptions:
+        setWeatherBgColor(RAIN_SKY_BG_COLOR);
+        break;
+      default:
+        setWeatherBgColor(CLEAR_SKY_BG_COLOR);
+        break;
+    }
+  };
+
   const dayjs = require("dayjs"); // dayjs 라이브러리를 사용하기 위해 require 합니다.
   const localizedFormat = require("dayjs/plugin/localizedFormat"); // 한국어 형식을 사용하기 위해 localizedFormat 플러그인을 불러옵니다.
   dayjs.extend(localizedFormat); // 플러그인을 사용합니다.
@@ -98,8 +115,6 @@ export default function MediumLand() {
   ) {
     return item.category === "TMX" && item.fcstDate === afterTomorrow;
   });
-
-  const makeWeatherObj = () => {};
 
   console.log(
     "TMX",
@@ -175,6 +190,7 @@ export default function MediumLand() {
       case "구름많고소나기":
         return mediumRainOptions;
       case "흐림":
+      case "4":
         return mediumCloudyOptions;
       case "흐리고 비":
       case "흐리고비":
