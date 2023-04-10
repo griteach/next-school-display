@@ -6,14 +6,14 @@ export interface ITitleComponentProps {
 
 export default function TitleComponent({ title }: ITitleComponentProps) {
   return (
-    <div className="w-full h-full bg-white rounded-3xl shadow-xl flex flex-col justify-center items-center ">
+    <div className="w-full h-full bg-white rounded-3xl shadow-xl flex flex-col justify-center items-center p-2">
       <div>
         <h6 className="text-5xl font-gwe_bold bg-gradient-to-r from-mojito-r to-mojito-l bg-clip-text text-transparent ">
           {title}
         </h6>
       </div>
       <div>
-        <p className="text-2xl mt-4">삶과 앎이 영그는 모두가 행복한 학교</p>
+        <p className="text-2xl mt-4">삶과 앎이 영그는 행복한 학교</p>
       </div>
       <div className="mt-2">
         <span className="text-2xl">{`${todayData.tYear}년 `}</span>

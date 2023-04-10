@@ -114,6 +114,8 @@ export interface MediumTemp {
 export interface IMeal {
   date: string;
   menu: [string];
+  cal: string;
+  ntr: [string];
 }
 export interface IMealGql {
   lunch: IMeal;
@@ -164,6 +166,8 @@ export const GET_MEAL = gql`
     lunch(schoolCode: $schoolCode, officeCode: $officeCode) {
       menu
       date
+      cal
+      ntr
     }
   }
 `;
