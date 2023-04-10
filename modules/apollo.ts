@@ -114,6 +114,8 @@ export interface MediumTemp {
 export interface IMeal {
   date: string;
   menu: [string];
+  cal: string;
+  ntr: [string];
 }
 export interface IMealGql {
   lunch: IMeal;
@@ -164,6 +166,8 @@ export const GET_MEAL = gql`
     lunch(schoolCode: $schoolCode, officeCode: $officeCode) {
       menu
       date
+      cal
+      ntr
     }
   }
 `;
@@ -333,10 +337,10 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   //Real Server
-  uri: "http://iteach12.iptime.org:51212/",
+  // uri: "http://iteach12.iptime.org:51212/",
 
   //Dev Server
-  // uri: "http://localhost:5001/",
+  uri: "http://localhost:5001/",
   cache,
 });
 

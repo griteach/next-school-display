@@ -13,7 +13,7 @@ export default function TitleComponent({ title }: ITitleComponentProps) {
         </h6>
       </div>
       <div>
-        <p className="text-2xl mt-4">삶과 앎이 영그는 모두가 행복한 학교</p>
+        <p className="text-2xl mt-4">삶과 앎이 영그는 행복한 학교</p>
       </div>
       <div className="mt-2">
         <span className="text-2xl">{`${todayData.tYear}년 `}</span>
