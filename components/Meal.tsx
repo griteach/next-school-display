@@ -41,13 +41,13 @@ export default function Meal() {
     borderWidth: 0,
   };
   return (
-    <div>
+    <div className="w-full h-full ">
       <div className="flex justify-start items-center">
         <ForkKnife size={40} color="#938FF2" />
         <div className="text-3xl ml-2">오늘의 급식</div>
       </div>
 
-      <div>
+      <div className="w-full h-full flex justify-evenly items-center ">
         <ul>
           {todayLunch?.menu.map((item) => (
             <li key={item}>
