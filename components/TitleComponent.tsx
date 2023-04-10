@@ -6,7 +6,7 @@ export interface ITitleComponentProps {
 
 export default function TitleComponent({ title }: ITitleComponentProps) {
   return (
-    <div className="w-full h-full bg-white rounded-3xl shadow-xl flex flex-col justify-center items-center ">
+    <div className="w-full h-full bg-white rounded-3xl shadow-xl flex flex-col justify-center items-center p-2">
       <div>
         <h6 className="text-5xl font-gwe_bold bg-gradient-to-r from-mojito-r to-mojito-l bg-clip-text text-transparent ">
           {title}
