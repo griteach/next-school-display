@@ -122,6 +122,16 @@ export default function MediumLand() {
       return item;
     })?.fcstValue
   );
+  console.log(
+    `MediumForcast: ${weatherGuessData?.allWeatherGuess.find(function (item) {
+      const result = item;
+      if (result != undefined) {
+        return item;
+      } else {
+        return "No way";
+      }
+    })}`
+  );
   console.log("TMn", tomorrowTmn);
   console.log("afterTMX", afterTomorrowTmx);
   console.log("afterTMn", afterTomorrowTmn);
@@ -201,8 +211,8 @@ export default function MediumLand() {
       case "흐리고 눈":
       case "흐리고 비/눈":
       case "흐리고비/눈":
-      case "구름많고 비/눈":
-      case "구름많고비/눈":
+      case "구름많고 비/눈":
+      case "구름많고비/눈":
         return mediumSnowOptions;
       default:
         return mediumWindyOptions;
@@ -274,11 +284,9 @@ export default function MediumLand() {
           }° / ${
             weatherGuessLoading
               ? "Loading..."
-              : parseInt(
-                  tomorrowTmn?.find(function (item) {
-                    return item;
-                  })?.fcstValue!
-                )
+              : tomorrowTmn?.find(function (item) {
+                  return item;
+                })?.fcstValue!
           }°`}</div>
           <div className="flex justify-center items-center">
             <div>
