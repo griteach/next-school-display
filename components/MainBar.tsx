@@ -3,6 +3,7 @@ import Lottie from "react-lottie";
 import Clock from "./Clock";
 import Meal from "./Meal";
 import MediumLand from "./MediumLand";
+import TimeTable from "./TimeTable";
 
 export default function MainBar() {
   return (
@@ -13,7 +14,7 @@ export default function MainBar() {
       <div className="rounded-2xl p-3 bg-white">D-day</div>
       <div className="rounded-2xl p-3 bg-white">BirthDay</div>
       <div className="rounded-2xl p-3 bg-white">
-        <div></div>
+        <TimeTable />
       </div>
       <div className="rounded-2xl p-3 bg-white">Holiday</div>
       <div className="rounded-2xl bg-white p-3 col-span-2">

@@ -26,7 +26,7 @@ export default function Clock() {
       <div className="w-full h-full flex justify-center items-center ">
         <div className="relative flex justify-center  w-full h-full items-center ">
           <div className="flex justify-between w-full px-4">
-            <div>
+            <div className="mt-2">
               <Lottie
                 options={clockOptions}
                 height={40}
