@@ -120,7 +120,7 @@ export default function AirQuality() {
                       if (item.category === "WSD") {
                         return item;
                       }
-                    })!.obsrValue
+                    })?.obsrValue
                   }
                   m/s
                 </div>
@@ -152,7 +152,7 @@ export default function AirQuality() {
                     ) {
                       return item;
                     }
-                  })!.fcstValue
+                  })?.fcstValue
                 }%`}</div>
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function AirQuality() {
                       if (item.category === "REH") {
                         return item;
                       }
-                    })!.obsrValue
+                    })?.obsrValue
                   }
                   %
                 </div>
