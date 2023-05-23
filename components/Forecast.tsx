@@ -107,7 +107,7 @@ export default function Forecast() {
     const pm10Result = parseInt(dustData?.dust.pm10Grade!);
     const pm25Result = parseInt(dustData?.dust.pm25Grade!);
     if (pm10Result > 2 || pm25Result > 2) {
-      setCurrentMsg("야외활동 금지!");
+      setCurrentMsg("야외활동 자제!");
     } else if (pm10Result > 1 || pm25Result > 1) {
       setCurrentMsg("나가도 좋아요!");
     } else if (pm10Result == 1 && pm25Result == 1) {

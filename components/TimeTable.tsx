@@ -25,7 +25,7 @@ export default function TimeTable() {
       <div className="w-full h-full flex flex-col">
         <div className="flex ">
           <Table size={40} color="#938FF2" />
-          <div className=" text-3xl ml-2">시간표</div>
+          <div className=" text-3xl ml-2">시정표</div>
         </div>
       </div>
     </div>

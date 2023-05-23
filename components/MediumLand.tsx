@@ -284,9 +284,11 @@ export default function MediumLand() {
           }° / ${
             weatherGuessLoading
               ? "Loading..."
-              : tomorrowTmn?.find(function (item) {
-                  return item;
-                })?.fcstValue!
+              : parseInt(
+                  tomorrowTmn?.find(function (item) {
+                    return item;
+                  })?.fcstValue!
+                )
           }°`}</div>
           <div className="flex justify-center items-center">
             <div>

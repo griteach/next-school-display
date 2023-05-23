@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { ForkKnife, Info } from "phosphor-react";
 import { SetStateAction, useEffect, useState } from "react";
 import LunchMenu from "./LunchMenu";
+import NoMeal from "./NoMeal";
 
 export default function Meal() {
   const [todayLunch, setTodayLunch] = useState<IMeal | null>(null);
@@ -23,6 +24,7 @@ export default function Meal() {
       },
     },
   });
+
   const myLunch = mealData?.lunch;
 
   useEffect(() => {
@@ -36,12 +38,15 @@ export default function Meal() {
       clearInterval(intercalId);
     };
   }, [mealRefetch, myLunch, mealData]);
-  const hrStyle = {
-    color: "red",
-    backgroundColor: "red",
-    height: 1,
-    borderWidth: 0,
-  };
+
+  if (myLunch === undefined) {
+    console.log("오늘은 급식이 없습니다.");
+    return (
+      <>
+        <NoMeal />
+      </>
+    );
+  }
   return (
     <div className="w-full h-full flex flex-col justify-evenly">
       <div className="flex flex-col">

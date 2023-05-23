@@ -20,6 +20,18 @@ import LottieClock from "../pages/lottie/etc/clock.json";
 //working 공사중 파일 임포트
 import LottieWorking from "../pages/lottie/etc/working.json";
 
+//no meal 급식 없을 때
+import LottieNoMeal from "../pages/lottie/etc/nomeal.json";
+
+//급식 없을 때
+export const noMealOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: LottieNoMeal,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 ////주간날씨예보
 //맑음
 export const mediumSunnyOptions = {
