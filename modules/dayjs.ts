@@ -28,7 +28,7 @@ const todayFormatDash = dayjs().format("YYYY-MM-DD");
 const tempHour = dayjs().get("hour");
 const currentHour = tempHour < 10 ? `0` + tempHour : tempHour;
 
-const todayData = {
+export const todayData = {
   day: today,
   day_dash: todayFormatDash,
   hour: currentHour + "00",
@@ -38,5 +38,3 @@ const todayData = {
   tDate: titleDate,
   tDay: titleDay,
 };
-
-export default todayData;
