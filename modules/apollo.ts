@@ -5,6 +5,14 @@ import { ApolloClient, gql, InMemoryCache } from "@apollo/client";
 //따로 엔드포인트(서버)를 하나 가지고 있는게 아니기 때문에!
 //나중에 DB랑 연동할거면 프리즈마? 라는 걸로 연결하면 될듯
 
+export interface AnniversaryInfo {
+  dateKind: string;
+  dateName: string;
+  isHoliday: string;
+  locdate: number;
+  seq: number;
+}
+
 export interface Weather {
   id: string;
   baseDate: string;
@@ -27,7 +35,7 @@ export interface WeatherGuess {
 }
 
 export interface MediumLand {
-  regId: String;
+  regId: string;
 
   //강수 예보
   rnSt3Am: number;
@@ -109,6 +117,10 @@ export interface MediumTemp {
   taMax10: number;
   taMax10Low: number;
   taMax10High: number;
+}
+
+export interface IAnniversaryGql {
+  anniversaryInfo: AnniversaryInfo[];
 }
 
 export interface IMeal {
@@ -196,6 +208,18 @@ export const GET_DUST = gql`
       no2Grade
       no2Value
       sidoName
+    }
+  }
+`;
+
+export const GET_ANNIVERSARY_INFO = gql`
+  query {
+    anniversaryInfo {
+      dateKind
+      dateName
+      isHoliday
+      locdate
+      seq
     }
   }
 `;

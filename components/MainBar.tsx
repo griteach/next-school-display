@@ -4,6 +4,7 @@ import Clock from "./Clock";
 import Meal from "./Meal";
 import MediumLand from "./MediumLand";
 import TimeTable from "./TimeTable";
+import Anniversary from "./Anniversary";
 
 export default function MainBar() {
   return (
@@ -16,7 +17,9 @@ export default function MainBar() {
       <div className="rounded-2xl p-3 bg-white">
         <TimeTable />
       </div>
-      <div className="rounded-2xl p-3 bg-white">Holiday</div>
+      <div className="rounded-2xl p-3 bg-white">
+        <Anniversary />
+      </div>
       <div className="rounded-2xl bg-white p-3 col-span-2">
         <MediumLand />
       </div>
