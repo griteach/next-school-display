@@ -54,7 +54,7 @@ export default function TimeTable() {
       ) {
         return "에듀버스 탑승";
       } else {
-        return "오늘도 고생하셨습니다";
+        return "하교 시간";
       }
     };
     const getActivity = () => {
@@ -80,8 +80,12 @@ export default function TimeTable() {
           <Table size={40} color="#938FF2" />
           <div className=" text-3xl ml-2">시정표</div>
         </div>
-        <div className="w-full h-full flex flex-col justify-center items-center  bg-teal-600">
-          <p>활동: {activity}</p>
+        <div className="w-full h-full flex flex-col justify-center items-center  ">
+          <div className="flex justify-center items-center">
+            <p className="mr-2 text-3xl">지금은 </p>
+            <p className="mr-2 text-6xl">{activity}</p>
+            <p className="mr-2 text-3xl"> 입니다.</p>
+          </div>
         </div>
       </div>
     </div>
