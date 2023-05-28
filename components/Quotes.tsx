@@ -13,7 +13,7 @@ export default function Quotes() {
   const [dailyAdvice, setDailyAdvice] = useState<IAdvice>({
     author: "박상준",
     authorProfile: "서원초등학교 교사",
-    message: "연습하면 다 돼!",
+    message: "아직 잘 안돼? 연습하면 다~~ 돼!",
     tag: 1,
   });
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Quotes() {
         <div className="flex ">
           <ChatCircleDots size={40} color="#938FF2" />
 
-          <div className=" text-3xl ml-2">마음공부</div>
+          <div className=" text-3xl ml-2">명언</div>
         </div>
         <div className="w-full h-full flex flex-col justify-center items-center p-8 ">
           <div className="text-3xl">{dailyAdvice.message}</div>
