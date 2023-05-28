@@ -6,7 +6,12 @@ export default function TimeTable() {
 
   useEffect(() => {
     const timeTable = (s_hour: number, s_min: number) => {
-      if ((s_hour === 9 && s_min >= 10) || (s_hour === 9 && s_min <= 50)) {
+      if ((s_hour === 8 && s_min >= 40) || (s_hour === 9 && s_min <= 10)) {
+        return "아침활동";
+      } else if (
+        (s_hour === 9 && s_min >= 10) ||
+        (s_hour === 9 && s_min <= 50)
+      ) {
         return "1교시";
       } else if (
         (s_hour === 9 && s_min >= 51) ||
@@ -47,12 +52,12 @@ export default function TimeTable() {
         (s_hour === 14 && s_min >= 31) ||
         (s_hour === 15 && s_min <= 50)
       ) {
-        return "방과후";
+        return "방과후 시간";
       } else if (
         (s_hour === 15 && s_min >= 51) ||
         (s_hour === 16 && s_min <= 10)
       ) {
-        return "에듀버스 탑승";
+        return "버스탑승 시간";
       } else {
         return "하교 시간";
       }
