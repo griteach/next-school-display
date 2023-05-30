@@ -48,6 +48,7 @@ export default function TitleComponent({ title }: ITitleComponentProps) {
         tDay: titleDay,
       };
     }
+
     setTodayText(getToday());
     const intercalId = setInterval(() => {
       setTodayText(getToday());
@@ -69,7 +70,7 @@ export default function TitleComponent({ title }: ITitleComponentProps) {
       </div>
       <div className="mt-2">
         <span className="text-2xl">{`${todayText?.tYear}년 `}</span>
-        <span className="text-2xl">{`${todayText?.tMonth}월 `}</span>
+        <span className="text-2xl">{`${todayText?.tMonth! + 1}월 `}</span>
         <span className="text-2xl">{`${todayText?.tDate}일 `}</span>
         <span className="text-2xl">{`${todayText?.tDay}`}</span>
       </div>
