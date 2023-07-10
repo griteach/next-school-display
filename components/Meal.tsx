@@ -14,7 +14,7 @@ export default function Meal() {
     refetch: mealRefetch,
   } = useQuery<IMealGql>(GET_MEAL, {
     variables: {
-      schoolCode: "7891019",
+      schoolCode: "7892021",
       officeCode: "K10",
       onCompleted: (mealData: {
         getMealData: SetStateAction<IMeal | null>;
