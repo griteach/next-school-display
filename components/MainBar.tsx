@@ -7,6 +7,7 @@ import TimeTable from "./TimeTable";
 import Anniversary from "./Anniversary";
 import CountriesInfo from "./Contries";
 import Quotes from "./Quotes";
+import Poem from "./Poem";
 
 export default function MainBar() {
   return (
@@ -23,14 +24,12 @@ export default function MainBar() {
       <div className="rounded-2xl p-3 bg-white">
         <TimeTable />
       </div>
-      <div className="rounded-2xl p-3 bg-white">
-        <Anniversary />
+      <div className="rounded-2xl p-3 row-span-2 bg-white">
+        <Poem />
       </div>
       <div className="rounded-2xl bg-white p-3 col-span-2">
         <MediumLand />
       </div>
-
-      <div className="rounded-2xl bg-white p-3 ">etc</div>
     </div>
   );
 }
